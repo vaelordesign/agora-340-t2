@@ -1,0 +1,1375 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Guide du Test 2 de philo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&family=Young+Serif&display=swap">
+<style>
+/* Layout : une colonne de lecture (max 880px), onglets collants, fiches ouvertes avec mots-clés surlignés comme dans un cahier d'étude */
+:root {
+  --bg: #EEF1F6;
+  --surface: #FFFFFF;
+  --ink: #141A2B;
+  --muted: #556078;
+  --line: #D5DBE6;
+  --accent: #2747B5;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E3E9FB;
+  --hl: #FFE066;
+  --hl-ink: #141A2B;
+  --blank: #C9D1E0;
+  --good: #17804F;
+  --good-soft: #E1F3EA;
+  --bad: #B83A26;
+  --bad-soft: #FBE7E3;
+  --font-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1320; --surface: #161C2C; --ink: #E7EBF3; --muted: #9BA6BC; --line: #283147;
+    --accent: #86A3FF; --accent-ink: #0E1320; --accent-soft: #1E2947;
+    --hl: #5C4D0E; --hl-ink: #FFF3BF; --blank: #34405C;
+    --good: #4CC38A; --good-soft: #12301F; --bad: #FF8A73; --bad-soft: #3A1A15;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1320; --surface: #161C2C; --ink: #E7EBF3; --muted: #9BA6BC; --line: #283147;
+  --accent: #86A3FF; --accent-ink: #0E1320; --accent-soft: #1E2947;
+  --hl: #5C4D0E; --hl-ink: #FFF3BF; --blank: #34405C;
+  --good: #4CC38A; --good-soft: #12301F; --bad: #FF8A73; --bad-soft: #3A1A15;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16.5px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 880px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); }
+h2 { font-size: clamp(1.45rem, 3.6vw, 1.8rem); }
+h3 { font-size: 1.2rem; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 1.25em; display: grid; gap: 4px; }
+.label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* En-tête */
+.top { padding-block: 28px 18px; display: grid; gap: 12px; }
+.top .course { color: var(--muted); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.fact { font-size: 0.86rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.how { color: var(--muted); font-size: 0.95rem; max-width: 65ch; }
+
+/* Onglets */
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.tabs .wrap { display: flex; gap: 4px; overflow-x: auto; padding-block: 8px; scrollbar-width: none; }
+.tab { font: inherit; font-weight: 700; font-size: 0.95rem; color: var(--muted); background: none; border: 0; padding: 8px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+.tab:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+main { padding-block: 22px 80px; }
+.view { display: grid; gap: 28px; }
+
+/* Fiches */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; min-width: 0; flex: 1 1 320px; }
+.chip { font: inherit; font-size: 0.85rem; white-space: nowrap; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; cursor: pointer; }
+.chip:hover { border-color: var(--accent); }
+.btn { font: inherit; font-weight: 700; font-size: 0.92rem; padding: 9px 14px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn:disabled { opacity: 0.45; cursor: default; }
+
+.group { display: grid; gap: 6px; padding-top: 18px; border-top: 2px solid var(--ink); }
+.group .label { color: var(--accent); }
+section.fiche { display: grid; gap: 14px; scroll-margin-top: 72px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px clamp(16px, 3vw, 26px); }
+.fiche > p, .fiche li { max-width: 68ch; }
+.sub { display: grid; gap: 6px; }
+.sub h4 { margin: 0; font-size: 1rem; font-weight: 700; }
+
+mark { background: var(--hl); color: var(--hl-ink); padding: 0 0.18em; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+body.cache mark:not(.vu) { color: transparent; background: var(--blank); cursor: pointer; user-select: none; }
+body.cache mark:not(.vu) * { visibility: hidden; }
+
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+.tbl.wide table { min-width: 620px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 11px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--bg); }
+td.k { font-weight: 700; white-space: nowrap; }
+
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.cell { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 6px; min-width: 0; }
+.cell h4 { margin: 0; font-size: 1rem; }
+
+.memo, .piege { border-radius: 10px; padding: 12px 14px; display: grid; gap: 6px; }
+.memo { border: 1.5px dashed var(--accent); background: var(--accent-soft); }
+.memo .label { color: var(--accent); }
+.piege { border: 1.5px solid var(--bad); background: var(--bad-soft); }
+.piege .label { color: var(--bad); }
+
+.syllo { font-family: var(--font-mono); font-size: 0.85rem; background: var(--bg); border-radius: 10px; padding: 12px 14px; display: grid; gap: 2px; overflow-x: auto; }
+.syllo b { color: var(--accent); font-weight: 500; display: inline-block; width: 2.4em; }
+
+details.corr { border: 1px solid var(--line); border-radius: 10px; }
+details.corr summary { cursor: pointer; padding: 10px 14px; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+details.corr summary::after { content: "Afficher"; font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; align-self: center; }
+details.corr[open] summary::after { content: "Masquer"; }
+details.corr summary::-webkit-details-marker { display: none; }
+details.corr .in { padding: 0 14px 14px; display: grid; gap: 8px; }
+.note { font-size: 0.86rem; color: var(--muted); }
+
+/* Cartes-éclair */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px clamp(16px, 3vw, 24px); display: grid; gap: 14px; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+select { font: inherit; font-size: 0.92rem; padding: 8px 10px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); max-width: 100%; }
+.check { display: flex; gap: 6px; align-items: center; font-size: 0.92rem; }
+.stats { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--ink); }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
+
+.flash { min-height: 240px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 22px clamp(16px, 4vw, 34px); display: grid; align-content: start; gap: 16px; }
+.flash .q { font-family: var(--font-display); font-size: clamp(1.25rem, 3.4vw, 1.55rem); line-height: 1.3; }
+.flash .a { border-top: 1px dashed var(--line); padding-top: 14px; font-size: 1.04rem; white-space: pre-line; }
+.flash .meta { display: flex; justify-content: space-between; gap: 10px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn.good { background: var(--good-soft); border-color: var(--good); color: var(--good); }
+.btn.bad { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+.kbd { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+/* Quiz */
+.qz { display: grid; gap: 14px; }
+.qz .q { font-family: var(--font-display); font-size: clamp(1.2rem, 3.2vw, 1.45rem); line-height: 1.3; }
+.opts { display: grid; gap: 8px; }
+.opt { font: inherit; text-align: left; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:disabled { cursor: default; }
+.opt.ok { border-color: var(--good); background: var(--good-soft); color: var(--ink); }
+.opt.ko { border-color: var(--bad); background: var(--bad-soft); color: var(--ink); }
+.feedback { border-radius: 10px; padding: 12px 14px; }
+.feedback.ok { background: var(--good-soft); }
+.feedback.ko { background: var(--bad-soft); }
+.bar { height: 6px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .25s; }
+.missed { display: grid; gap: 10px; }
+.missed div { border-left: 3px solid var(--bad); padding-left: 10px; }
+
+/* Développement */
+.dev { display: grid; gap: 10px; }
+.dev details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.dev summary { cursor: pointer; padding: 14px 16px; display: grid; gap: 4px; list-style: none; }
+.dev summary::-webkit-details-marker { display: none; }
+.dev summary .t { font-family: var(--font-display); font-size: 1.12rem; line-height: 1.3; }
+.dev .in { padding: 0 16px 16px; display: grid; gap: 12px; }
+.dev .in h4 { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+.dev .blk { display: grid; gap: 4px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <p class="label">Collège André-Grasset · 340-101-MQ · Philosophie et rationalité</p>
+  <h1>Test de compréhension 2</h1>
+  <div class="facts">
+    <span class="fact">Durée : 2 heures</span>
+    <span class="fact">Choix multiples · réponses courtes · développement</span>
+    <span class="fact">Dictionnaire personnel permis</span>
+    <span class="fact">Téléphone à l'avant, pas d'étui à crayons</span>
+  </div>
+  <p class="how">Méthode : lis une fiche, puis active <b>Cacher les mots surlignés</b> et récite-la. Touche un bloc gris pour le révéler. Ensuite, fais les cartes-éclair, le quiz, et pratique les plans de développement.</p>
+</header>
+
+<nav class="tabs" aria-label="Sections du guide">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" id="tab-fiches" data-view="fiches" aria-selected="true">Fiches</button>
+    <button class="tab" role="tab" id="tab-cartes" data-view="cartes" aria-selected="false">Cartes-éclair</button>
+    <button class="tab" role="tab" id="tab-quiz" data-view="quiz" aria-selected="false">Quiz</button>
+    <button class="tab" role="tab" id="tab-developpement" data-view="developpement" aria-selected="false">Développement</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ===================== FICHES ===================== -->
+<div class="view" id="view-fiches" role="tabpanel" aria-labelledby="tab-fiches">
+
+  <div class="toolbar">
+    <div class="chips" id="chips"></div>
+    <button class="btn" id="btn-cache" aria-pressed="false">Cacher les mots surlignés</button>
+  </div>
+
+  <!-- BLOC 1 -->
+  <div class="group">
+    <span class="label">Bloc 1 · 8 thèmes</span>
+    <h2>L'argumentation rationnelle</h2>
+  </div>
+
+  <section class="fiche" id="s-discours" data-chip="Types de discours">
+    <h3>Les types de discours</h3>
+    <p>Il y a <mark>4 types de discours</mark>. Deux questions suffisent pour les classer : est-ce qu'il s'appuie sur la <b>croyance</b> ou la <b>raison</b>? Est-ce qu'il veut <b>expliquer un phénomène</b> ou <b>donner du sens</b>?</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th></th><th>Expliquer un phénomène</th><th>Donner du sens</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Croyance</td><td><mark>Magico-superstitieux</mark></td><td><mark>Religieux</mark></td></tr>
+          <tr><td class="k">Raison</td><td><mark>Scientifique</mark></td><td><mark>Philosophique</mark></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="cell">
+        <h4>Magico-superstitieux</h4>
+        <ul>
+          <li>Explique un phénomène avec des <mark>entités magiques ou surnaturelles</mark>.</li>
+          <li>S'appuie sur la <mark>croyance et non la raison</mark>.</li>
+          <li>Objectif : <mark>apaiser les anxiétés venant de l'inconnu</mark>.</li>
+          <li>Peut être <mark>erroné, divertissant ou manipulateur</mark>.</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <h4>Religieux</h4>
+        <ul>
+          <li>Cherche à <mark>donner du sens</mark> et répondre aux <mark>questions fondamentales</mark> (mort, souffrance, amour).</li>
+          <li>S'appuie sur la croyance, réfère à des <mark>êtres surnaturels</mark>, peut être <mark>imprécis</mark>.</li>
+          <li>Le réel peut <mark>dépasser ce que la raison peut saisir</mark> : il faut accepter une part de croyance.</li>
+          <li>Donne une <mark>orientation à nos actions</mark>, sert de <mark>guide spirituel</mark>.</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <h4>Scientifique</h4>
+        <ul>
+          <li>Explique des phénomènes par la <mark>raison</mark>.</li>
+          <li>Part d'une <mark>hypothèse</mark>, d'<mark>expériences</mark> et de l'<mark>analyse des données</mark> pour tirer des <mark>conclusions vérifiables</mark>.</li>
+          <li>Sa marque : <mark>précision et exactitude</mark> (d'où la <mark>vérification des sources</mark>).</li>
+          <li>N'apaise pas l'anxiété : intention de <mark>prévision ou de contrôle</mark>.</li>
+          <li>Il faut accepter ses conclusions <mark>même contre notre intuition ou notre volonté</mark>.</li>
+          <li>Certains discours magico-superstitieux imitent la méthode scientifique : ex. les <mark>théories du complot</mark>.</li>
+        </ul>
+      </div>
+      <div class="cell">
+        <h4>Philosophique</h4>
+        <ul>
+          <li>Basé sur la <mark>raison</mark>, répond à des <mark>questions fondamentales</mark>.</li>
+          <li>Sa rationalité est fondée sur <mark>l'argumentation et l'évaluation de celle-ci</mark>.</li>
+          <li>Le <mark>doute</mark> face à nos opinions et connaissances est le <mark>premier pas vers la recherche rationnelle de la vérité</mark>.</li>
+          <li>Cherche à <mark>donner du sens</mark>, contrairement à la science qui veut <mark>simplement expliquer</mark>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub">
+      <h4>Les 5 questions pour rester critique (discours qui se dit scientifique)</h4>
+      <ol>
+        <li>Comment se construit <mark>l'argumentaire</mark>?</li>
+        <li>Les personnes citées sont-elles des <mark>autorités dans le domaine</mark> et font-elles <mark>consensus</mark>?</li>
+        <li>La théorie implique-t-elle de <mark>renier toutes les sources officielles</mark>?</li>
+        <li>La théorie joue-t-elle sur nos <mark>sentiments</mark>?</li>
+        <li>La théorie rejette-t-elle <mark>toute remise en question</mark>?</li>
+      </ol>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p>Magie et Science <b>expliquent</b>. Religion et Philo <b>donnent du sens</b>. Magie et Religion <b>croient</b>. Science et Philo <b>raisonnent</b>. Retrouve la case du tableau et tu as la réponse.</p></div>
+    <div class="piege"><span class="label">Piège d'examen</span><p>Religieux et magico-superstitieux partagent croyance, surnaturel et imprécision. Seul le <b>but</b> les sépare : donner du sens (religieux) ou expliquer un phénomène (magico).</p></div>
+    <details class="corr"><summary>Corrigé de l'exercice du cours</summary><div class="in">
+      <p>a) religieux · b) scientifique · c) philosophique · d) magico-superstitieux</p>
+    </div></details>
+  </section>
+
+  <section class="fiche" id="s-principes" data-chip="Principes">
+    <h3>La logique et les principes de l'argumentation</h3>
+    <ul>
+      <li>Les êtres humains ont une <mark>aptitude innée</mark> pour le raisonnement, mais les <mark>règles et normes</mark> qui le régissent <mark>doivent être apprises</mark>.</li>
+      <li>La <mark>logique</mark> est la discipline philosophique qui se soucie de la <mark>rectitude du raisonnement</mark>.</li>
+      <li>Logique <mark>formelle</mark> = <mark>symbolisme</mark> · logique <mark>informelle</mark> = <mark>argumentation</mark>.</li>
+    </ul>
+    <div class="tbl wide">
+      <table>
+        <thead><tr><th>Principe</th><th>Ce qu'il exige</th></tr></thead>
+        <tbody>
+          <tr><td class="k">1. <mark>Respect des règles de l'échange</mark></td><td>a) La <mark>recherche communautaire</mark> de la connaissance et de la vérité · b) La <mark>bonne foi</mark> dans les échanges · c) Ne pas <mark>tromper volontairement</mark>, <mark>dévier la conversation</mark> ou faire appel à la <mark>persuasion</mark></td></tr>
+          <tr><td class="k">2. <mark>Charité envers autrui</mark></td><td>a) S'il y a place à l'interprétation, opter pour <mark>la plus favorable</mark> · b) Donner le <mark>bénéfice du doute</mark>, être généreux <mark>sans faire de concessions invalides</mark></td></tr>
+          <tr><td class="k">3. <mark>Faillibilité</mark></td><td>a) Accepter de <mark>remettre en question nos opinions</mark> face à une <mark>réfutation rationnelle</mark> · b) Viser <mark>la vérité</mark> et non la <mark>confirmation de nos opinions</mark> · c) Toute opinion doit être <mark>argumentée rationnellement</mark></td></tr>
+          <tr><td class="k">4. <mark>Accord des esprits</mark></td><td>a) La position rationnelle révélée <mark>ne peut pas être imposée</mark> aux personnes <mark>à l'extérieur de la communauté de recherche</mark> · b) Reprendre la discussion <mark>avec d'autres interlocuteurs</mark> pour éviter un <mark>dogmatisme</mark></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p><b>R</b>aisonner <b>C</b>almement <b>F</b>ait l'<b>A</b>ccord : <b>R</b>espect des règles · <b>C</b>harité · <b>F</b>aillibilité · <b>A</b>ccord des esprits.</p></div>
+  </section>
+
+  <section class="fiche" id="s-jugements" data-chip="Types de jugements">
+    <h3>La proposition et les types de jugements</h3>
+    <div class="sub">
+      <h4>La proposition</h4>
+      <ul>
+        <li>Aussi appelée <mark>assertion</mark> ou <mark>jugement</mark>.</li>
+        <li><mark>Matériau de base</mark> de l'argumentation, agencé pour construire des raisonnements.</li>
+        <li><mark>Assertion déclarative</mark> faite par une personne. Une phrase peut contenir <mark>plusieurs propositions</mark>.</li>
+        <li>On peut y répondre par <mark>« cela est vrai » ou « cela est faux »</mark>.</li>
+        <li>Exclut les phrases <mark>impératives et interrogatives</mark>.</li>
+        <li>La <mark>clarté</mark> des propositions facilite la progression de la discussion.</li>
+      </ul>
+    </div>
+    <div class="tbl wide">
+      <table>
+        <thead><tr><th>Jugement</th><th>Autre nom</th><th>Définition</th><th>Force et véracité</th><th>Exemple</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="k">Fait</td><td><mark>Proposition empirique</mark></td>
+            <td>Porte sur l'<mark>existence ou l'inexistence dans la réalité sensible</mark>. Description <mark>neutre et objective</mark>, sans éléments subjectifs ou de préférence.</td>
+            <td>Peut être <mark>vrai, faux ou probable</mark>. La <mark>méthode d'évaluation dépend du type</mark> de fait (la météo aujourd'hui vs le nombre de tentacules d'une pieuvre).</td>
+            <td>Il pleut dehors.</td>
+          </tr>
+          <tr>
+            <td class="k">Préférence</td><td><mark>Jugement de goût</mark></td>
+            <td>Exprime la préférence d'un individu ou d'un groupe. <mark>Aucune utilité en argumentation</mark> : ne fait pas avancer l'argumentation rationnelle.</td>
+            <td><mark>Purement subjectif</mark> : <mark>aucune place dans un débat rationnel</mark>. Véracité basée <mark>uniquement sur les goûts individuels</mark>.</td>
+            <td>Je préfère le café au thé.</td>
+          </tr>
+          <tr>
+            <td class="k">Valeur</td><td><mark>Proposition d'appréciation</mark></td>
+            <td>Déclare qu'une chose est <mark>digne ou non d'estime sur le plan moral</mark>. <mark>Essence des discours éthiques et politiques</mark>. Part de <mark>subjectivité et d'objectivité</mark>, mais pas irrationnel.</td>
+            <td>Partiellement subjectif : critères = <mark>cohérence et pertinence</mark>. Évaluer la véracité des <mark>jugements de fait qui le sous-tendent</mark>.</td>
+            <td>Ce film est excellent.</td>
+          </tr>
+          <tr>
+            <td class="k">Prescription</td><td><mark>Proposition d'obligation</mark></td>
+            <td><mark>Invite une personne à adopter un comportement</mark> ou à agir d'une certaine manière. Repose sur des <mark>jugements de fait ou de valeur</mark>.</td>
+            <td>Évaluer la véracité des <mark>jugements qui le sous-tendent</mark> et analyser la <mark>pertinence et la suffisance</mark> des arguments qui le soutiennent.</td>
+            <td>Tu devrais dire la vérité.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sub">
+      <h4>Les 4 jugements de fait, selon la quantification du sujet (sujet « arbre », prédicat « vert »)</h4>
+      <div class="tbl">
+        <table>
+          <tbody>
+            <tr><td class="k"><mark>Singulière</mark></td><td><mark>Cet</mark> arbre est vert.</td></tr>
+            <tr><td class="k"><mark>Particulière</mark></td><td><mark>Certains</mark> arbres sont verts.</td></tr>
+            <tr><td class="k"><mark>Universelle</mark></td><td><mark>Tous</mark> les arbres sont verts.</td></tr>
+            <tr><td class="k"><mark>Indéfinie</mark></td><td><mark>L'</mark>arbre est vert.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p>Les autres noms : <b>E-G-A-O</b> = <b>E</b>mpirique (fait), <b>G</b>oût (préférence), <b>A</b>ppréciation (valeur), <b>O</b>bligation (prescription).<br>Les 4 faits : <b>Cet · Certains · Tous · L'</b> = Singulière · Particulière · Universelle · Indéfinie (« S-P-U-I »).</p></div>
+    <div class="piege"><span class="label">Piège d'examen</span><p>Valeur ou préférence? La valeur porte sur l'<b>estime morale</b> et contient une <b>partie objective</b>. Sans partie objective, c'est une préférence. Repère aussi les mots « devrait », « il faut » : c'est une prescription.</p></div>
+  </section>
+
+  <section class="fiche" id="s-raisonnement" data-chip="Structure du raisonnement">
+    <h3>La structure du raisonnement</h3>
+    <ul>
+      <li>Un raisonnement est un <mark>type particulier de discours</mark>, utilisé pour <mark>convaincre rationnellement</mark>.</li>
+      <li>But : démontrer que la proposition <mark>« conclusion »</mark> est vraie sur la base de sa relation avec les autres propositions, les <mark>« prémisses »</mark>.</li>
+      <li>La vérité des prémisses (P) implique que la conclusion (C) est <mark>vraie ou acceptable</mark>.</li>
+      <li>Bien formé : <mark>P justifie rationnellement C</mark>. Relation inverse : <mark>C est une conséquence logique de P</mark>.</li>
+    </ul>
+    <div class="grid2">
+      <div class="syllo">
+        <span class="label">Bien formé</span>
+        <span><b>P1</b>Tous les mammifères respirent de l'air.</span>
+        <span><b>P2</b>Les dauphins sont des mammifères.</span>
+        <span><b>C</b>Donc, les dauphins respirent de l'air.</span>
+      </div>
+      <div class="syllo">
+        <span class="label">Mal formé</span>
+        <span><b>P1</b>Certains animaux sont des chats.</span>
+        <span><b>P2</b>Cet animal est une chauve-souris.</span>
+        <span><b>C</b>Donc cette chauve-souris est un chat.</span>
+      </div>
+    </div>
+    <details class="corr"><summary>Corrigé proposé : la conclusion découle-t-elle des prémisses?</summary><div class="in">
+      <ul>
+        <li><b>Marie enseigne un cours, donc elle est professeure</b> : non. Enseigner un cours n'est pas réservé aux profs. Version valide : « Tous les professeurs enseignent un cours. Marie est professeure. Donc Marie enseigne un cours. »</li>
+        <li><b>Dauphins / mammifères</b> : oui.</li>
+        <li><b>Sophie doit remettre un travail final</b> : oui.</li>
+        <li><b>Aucun carré n'a quatre côtés…</b> : la forme se tient, mais P1 est fausse (problème d'acceptabilité). Version valide : « Tous les carrés ont quatre côtés égaux. Cette figure n'a pas quatre côtés égaux. Donc ce n'est pas un carré. »</li>
+        <li><b>Socrate est un être humain</b> : oui.</li>
+        <li><b>Félix est un chat</b> : non. Version valide : « Tous les chats sont des animaux. Félix est un chat. Donc Félix est un animal. »</li>
+      </ul>
+      <p class="note">La prof n'a pas fourni ce corrigé dans les PDF. Compare avec ce qui a été dit en classe.</p>
+    </div></details>
+  </section>
+
+  <section class="fiche" id="s-deduction" data-chip="Déductif / inductif">
+    <h3>Les raisonnements déductif et inductif</h3>
+    <div class="tbl wide">
+      <table>
+        <thead><tr><th></th><th>Déductif</th><th>Inductif</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Direction</td><td>Du <mark>général au particulier</mark></td><td>Du <mark>particulier au général</mark></td></tr>
+          <tr><td class="k">Si P vraies…</td><td>C est <mark>nécessairement vraie</mark></td><td>C est <mark>probable, mais non certaine</mark></td></tr>
+          <tr><td class="k">Contenu</td><td>C est <mark>contenue logiquement</mark> dans les prémisses</td><td>C <mark>dépasse</mark> ce qui est directement contenu dans les prémisses</td></tr>
+          <tr><td class="k">Sert à</td><td><mark>Démontrer avec certitude</mark> (<mark>validité logique</mark>)</td><td>Formuler des <mark>généralisations basées sur l'observation</mark></td></tr>
+          <tr><td class="k">Exemple</td><td>Tous les mammifères respirent de l'air. Les chiens sont des mammifères. Donc les chiens respirent de l'air.</td><td>Tous les cygnes observés ici sont blancs. Donc tous les cygnes sont blancs. (Faux s'il y a des <mark>cygnes noirs</mark> ailleurs.)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sub">
+      <h4>Le raisonnement inductif</h4>
+      <ul>
+        <li>La vérité des prémisses rend <mark>probable</mark> la vérité de la conclusion.</li>
+        <li>Même bien formé, <mark>aucune garantie absolue</mark>.</li>
+        <li>La <mark>majorité de nos raisonnements quotidiens</mark> sont inductifs.</li>
+        <li>3 exemples du cours : le <mark>soleil se lèvera demain</mark> · les <mark>20 étudiants</mark> qui préfèrent étudier avec de la musique (on généralise à partir d'un <mark>groupe limité</mark>) · le <mark>café le soir</mark> (relation <mark>causale probable</mark>).</li>
+      </ul>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p><b>DÉ</b>ductif <b>DÉ</b>scend : de la règle générale vers le cas. <b>IN</b>ductif <b>IN</b>vente la règle à partir des cas observés.</p></div>
+    <details class="corr"><summary>Corrigé proposé : classer A, B, C du plus fort au plus faible</summary><div class="in">
+      <p><b>C &gt; B &gt; A.</b> C repose sur 15 000 étudiants et conclut prudemment (« la majorité »). B repose sur 50 cas et dit « probablement ». A généralise à « tous » à partir de 2 étudiants (généralisation hâtive). Critères : taille de l'échantillon, représentativité, prudence de la conclusion.</p>
+    </div></details>
+  </section>
+
+  <section class="fiche" id="s-evaluation" data-chip="Acceptabilité · pertinence · suffisance">
+    <h3>Évaluer un raisonnement : acceptabilité, pertinence, suffisance</h3>
+    <p>On évalue d'abord <b>chaque prémisse</b> (acceptabilité), puis <b>le lien</b> entre les prémisses et la conclusion (pertinence et suffisance).</p>
+    <div class="sub">
+      <h4>1. L'acceptabilité des prémisses</h4>
+      <div class="tbl wide">
+        <table>
+          <tbody>
+            <tr><td class="k">Fait</td><td>Doit être <mark>vrai ou probable</mark>. On se base sur des <mark>observations fiables</mark>, des <mark>preuves solides</mark>, des <mark>données validées</mark>, des <mark>sources crédibles</mark> et des <mark>expertises pertinentes</mark>.</td></tr>
+            <tr><td class="k">Valeur</td><td>S'appuie sur des <mark>jugements de fait évaluables séparément</mark>. S'assurer qu'il y a une <mark>partie objective</mark> (sinon c'est une préférence).</td></tr>
+            <tr><td class="k">Prescription</td><td>S'appuie sur des <mark>jugements de fait évaluables séparément</mark>. Évaluer la <mark>nature et l'effet</mark> de la prescription : <mark>faisabilité</mark>, <mark>lien avec l'objectif</mark>, <mark>conséquences</mark>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="sub">
+      <h4>2. La pertinence des prémisses</h4>
+      <ul>
+        <li>Même acceptables, les prémisses n'apportent pas forcément un <mark>élément de preuve pertinent</mark>.</li>
+        <li>Elles doivent avoir un <mark>lien clair et direct</mark> avec la conclusion.</li>
+        <li><mark>Pas de critère précis</mark> : faire preuve de <mark>sens critique</mark> et examiner le lien logique.</li>
+        <li>Exemples : « Le dauphin est un mammifère… donc la <mark>Lune</mark> tourne autour de la Terre. » · « <mark>Ambre</mark> est adepte de la moto. Il y a eu un vol de cellulaire. Donc Ambre a volé le cellulaire. »</li>
+      </ul>
+    </div>
+    <div class="sub">
+      <h4>3. La suffisance des prémisses</h4>
+      <ul>
+        <li>Même acceptables et pertinentes, elles ne sont pas forcément <mark>suffisantes</mark> pour établir la conclusion.</li>
+        <li><mark>Seuls les raisonnements déductifs ont une parfaite suffisance</mark>.</li>
+        <li>En induction, la suffisance indique le <mark>degré d'acceptabilité ou de probabilité</mark> de la conclusion.</li>
+        <li>Les liens doivent être <mark>suffisamment forts</mark> pour donner un poids convenable à la conclusion.</li>
+        <li>Exemples : un citoyen de <mark>Saint-Honoré</mark> désagréable, donc tous le sont · la <mark>chaussée est mouillée, donc il pleut</mark>.</li>
+      </ul>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p><b>A-P-S</b> : <b>A</b> = la prémisse seule est-elle vraie? <b>P</b> = a-t-elle un lien avec la conclusion? <b>S</b> = ce lien est-il assez fort?</p></div>
+    <details class="corr"><summary>Corrigé proposé : pertinence (Greta Thunberg)</summary><div class="in">
+      <p>Les trois argumentations aux prémisses peu ou pas pertinentes : <b>1</b> (âge et syndrome d'Asperger), <b>4</b> (jeune et suédoise) et <b>6</b> (la grève chez Exceldor n'a rien à voir avec la grève étudiante).</p>
+    </div></details>
+    <details class="corr"><summary>Corrigé proposé : suffisance</summary><div class="in">
+      <p>Seule la <b>3</b> (tourte voyageuse éteinte depuis plus d'un siècle) respecte la suffisance. La 1 généralise à partir d'une seule observation. La 2 passe de « diminue les risques » à « jamais ». La 4 passe de « contre le passeport vaccinal » à « contre les vaccins et carnet pas à jour ».</p>
+    </div></details>
+  </section>
+
+  <section class="fiche" id="s-sophismes" data-chip="Sophismes">
+    <h3>Les sophismes</h3>
+    <ul>
+      <li>Raisonnements <mark>non conformes aux règles de la logique</mark> et <mark>consciemment utilisés pour tromper autrui</mark>.</li>
+      <li>Des <mark>ruses ayant l'apparence de la rationalité</mark>, qui visent à <mark>persuader et non à convaincre rationnellement</mark>.</li>
+      <li>Tout sophisme contient un défaut d'<mark>acceptabilité</mark>, de <mark>pertinence</mark> ou de <mark>suffisance</mark>.</li>
+      <li>Présents en <mark>politique, dans les médias, les discussions et les publicités</mark> (manuel p. 29 à 31).</li>
+    </ul>
+    <div class="tbl wide">
+      <table>
+        <thead><tr><th>Critère</th><th>Sophisme</th><th>Définition</th><th>Exemple du cours</th></tr></thead>
+        <tbody>
+          <tr><td class="k" rowspan="2">Acceptabilité</td><td class="k"><mark>Appel à l'autorité</mark></td><td>Invoquer un expert <mark>sans compétence sur le sujet</mark></td><td>Le camion Ford est excellent, <mark>The Rock</mark> a le même.</td></tr>
+          <tr><td class="k"><mark>Faux dilemme</mark></td><td>Imposer un <mark>choix entre deux options</mark> qui implique le rejet de l'autre</td><td>Soit on réduit les dépenses, soit <mark>l'économie s'effondre</mark>.</td></tr>
+          <tr><td class="k" rowspan="6">Pertinence</td><td class="k"><mark>Attaque contre la personne</mark></td><td>Attaquer <mark>l'individu ou l'institution</mark> au lieu de réfuter le raisonnement</td><td>Ton argument ne vaut rien, <mark>tu conduis un VUS</mark>.</td></tr>
+          <tr><td class="k"><mark>Double faute</mark></td><td>Justifier une opinion par <mark>les fautes commises par autrui</mark></td><td>Je roulais trop vite, mais je <mark>suivais le trafic</mark>.</td></tr>
+          <tr><td class="k"><mark>Caricature</mark></td><td><mark>Déformer la position</mark> de quelqu'un pour la réfuter plus facilement</td><td>Réduire les téléphones? Donc tu veux <mark>interdire toute technologie</mark>.</td></tr>
+          <tr><td class="k"><mark>Appel à la popularité</mark></td><td>Fonder la crédibilité d'une opinion sur le fait qu'<mark>une grande partie de la population y croit</mark></td><td><mark>Tout le monde pense</mark> que ce film est bon.</td></tr>
+          <tr><td class="k"><mark>Appel à la modernité / nouveauté</mark></td><td>Fonder la valeur d'une croyance sur son <mark>originalité ou son avant-gardisme</mark></td><td>Le meilleur téléphone, car il <mark>vient de sortir</mark>.</td></tr>
+          <tr><td class="k"><mark>Lien causal douteux</mark></td><td>Supposer une <mark>relation de cause à effet sans preuve</mark></td><td>Depuis mon <mark>nouveau téléphone</mark>, mes notes ont baissé.</td></tr>
+          <tr><td class="k" rowspan="3">Suffisance</td><td class="k"><mark>Généralisation hâtive</mark></td><td>Conclusion générale à partir d'un <mark>nombre insuffisant de cas</mark></td><td><mark>Deux étudiants</mark> en retard, donc le programme est irresponsable.</td></tr>
+          <tr><td class="k"><mark>Pente fatale</mark></td><td>Une action entraînera une <mark>série de conséquences extrêmes</mark>, sans preuve suffisante</td><td>Un repas pas équilibré… fast food… <mark>mourir avant 40 ans</mark>.</td></tr>
+          <tr><td class="k"><mark>Affirmation du conséquent</mark></td><td>Affirmer qu'une <mark>condition nécessaire est suffisante</mark></td><td>S'il pleut, il y a des nuages. <mark>Il y a des nuages, donc il pleut</mark>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="memo"><span class="label">Truc mémo · 2 · 6 · 3</span>
+      <p><b>Acceptabilité (2)</b> : « <b>AF</b> » = <b>A</b>utorité, <b>F</b>aux dilemme.</p>
+      <p><b>Pertinence (6)</b> : « <b>A</b>h! <b>D</b>eux <b>C</b>hats <b>P</b>our <b>M</b>on <b>L</b>it » = <b>A</b>ttaque, <b>D</b>ouble faute, <b>C</b>aricature, <b>P</b>opularité, <b>M</b>odernité, <b>L</b>ien causal douteux.</p>
+      <p><b>Suffisance (3)</b> : « <b>GPA</b> » = <b>G</b>énéralisation hâtive, <b>P</b>ente fatale, <b>A</b>ffirmation du conséquent.</p>
+    </div>
+    <div class="piege"><span class="label">Pièges d'examen</span>
+      <ul>
+        <li>Le <b>lien causal douteux</b> est classé en <b>pertinence</b>, pas en suffisance.</li>
+        <li>L'<b>affirmation du conséquent</b> est en <b>suffisance</b>.</li>
+        <li>Le <b>faux dilemme</b> est en <b>acceptabilité</b>.</li>
+        <li>Citer un vrai expert dans <b>son</b> domaine n'est pas un sophisme. L'appel à l'autorité, c'est un expert hors de sa compétence.</li>
+      </ul>
+    </div>
+    <details class="corr"><summary>Corrigé proposé : le texte sur les jeunes et les écrans</summary><div class="in">
+      <div class="tbl wide"><table><tbody>
+        <tr><td class="k">(1)</td><td>« Les jeunes ne savent pas lire. »</td><td>Généralisation hâtive</td></tr>
+        <tr><td class="k">(2)</td><td>« Ils ont tout le temps les yeux rivés sur leur écran. »</td><td>Généralisation hâtive (ou lien causal douteux : écran, donc ne savent pas lire)</td></tr>
+        <tr><td class="k">(3)</td><td>« Parce qu'ils sont jeunes, ils ne savent pas penser… »</td><td>Attaque contre la personne</td></tr>
+        <tr><td class="k">(4)</td><td>« Pour preuve, mon neveu… »</td><td>Généralisation hâtive (un seul cas)</td></tr>
+        <tr><td class="k">(5)</td><td>« Mon neveu ressemble à une moule. »</td><td>Attaque contre la personne</td></tr>
+        <tr><td class="k">(6)</td><td>« Ou bien la société agit par des lois, ou bien… »</td><td>Faux dilemme</td></tr>
+        <tr><td class="k">(7)</td><td>« …une société comme celle du Moyen Âge. »</td><td>Pente fatale</td></tr>
+        <tr><td class="k">(8)</td><td>« Ce sont sûrement les fabricants de logiciels… »</td><td>Lien causal douteux (on peut aussi y voir une attaque contre une institution)</td></tr>
+        <tr><td class="k">(9)</td><td>« Tout le monde le dit… »</td><td>Appel à la popularité</td></tr>
+      </tbody></table></div>
+      <p class="note">Réponses déduites des définitions du cours. Vérifie les cas (2) et (8) avec la correction faite en classe.</p>
+    </div></details>
+  </section>
+
+  <!-- BLOC 2 -->
+  <div class="group">
+    <span class="label">Bloc 2 · 1 thème</span>
+    <h2>Le film <i>Thank You for Smoking</i></h2>
+  </div>
+
+  <section class="fiche" id="s-film" data-chip="Thank You for Smoking">
+    <h3>Thank You for Smoking (2005)</h3>
+    <p class="note">Les PDF du cours contiennent seulement les questions de visionnement. Les réponses ci-dessous résument le film. Compare-les avec tes notes prises pendant le visionnement.</p>
+    <div class="tbl wide">
+      <table>
+        <thead><tr><th>Personnage</th><th>Rôle</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Nick Naylor</td><td>Porte-parole et lobbyiste de l'<mark>Academy of Tobacco Studies</mark>. Il persuade, il ne cherche pas la vérité.</td></tr>
+          <tr><td class="k">Joey</td><td>Son fils, à qui il enseigne l'art d'argumenter.</td></tr>
+          <tr><td class="k">MOD Squad</td><td>« <mark>Merchants Of Death</mark> » (marchands de la mort) : Nick (<mark>tabac</mark>), Polly Bailey (<mark>alcool</mark>), Bobby Jay Bliss (<mark>armes à feu</mark>).</td></tr>
+          <tr><td class="k">Sénateur Finistirre</td><td>Sénateur du Vermont qui veut une <mark>tête de mort sur les paquets</mark> de cigarettes.</td></tr>
+          <tr><td class="k">Heather Holloway</td><td>Journaliste qui séduit Nick et <mark>publie ses confidences</mark>.</td></tr>
+          <tr><td class="k">Jeff Megall</td><td>Super-agent d'Hollywood : le <mark>contrat tabac-cinéma</mark>.</td></tr>
+          <tr><td class="k">Lorne Lutch</td><td>Ancien cowboy des pubs Marlboro (« <mark>Marlboro Man</mark> »), atteint d'un cancer.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="cell"><h4>Arguments de Nick pour le tabac</h4><ul>
+        <li><mark>Liberté de choix</mark> et <mark>responsabilité individuelle</mark> : les adultes sont informés.</li>
+        <li>« Tout le monde sait » que la cigarette est dangereuse.</li>
+        <li>L'industrie a <mark>intérêt à garder ses clients en vie</mark>.</li>
+        <li>D'autres produits tuent aussi (<mark>cheddar du Vermont</mark>, avions, autos).</li>
+        <li>C'est aux <mark>parents</mark> d'éduquer leurs enfants.</li>
+      </ul></div>
+      <div class="cell"><h4>Comment il se justifie</h4><ul>
+        <li>Il doit <mark>« payer l'hypothèque »</mark>, comme tout le monde.</li>
+        <li>Il est <mark>doué pour argumenter</mark> : c'est son talent.</li>
+        <li>Il prétend défendre la <mark>liberté</mark> et le droit de choisir.</li>
+      </ul></div>
+      <div class="cell"><h4>Le contrat tabac-cinéma</h4><ul>
+        <li>Faire fumer des <mark>vedettes dans des films</mark> à grand budget.</li>
+        <li>Tabac : une <mark>image glamour</mark>, une pub déguisée auprès des jeunes.</li>
+        <li>Cinéma : <mark>beaucoup d'argent</mark>.</li>
+      </ul></div>
+      <div class="cell"><h4>L'ancien Marlboro Man</h4><ul>
+        <li>Lorne Lutch dénonce le tabac qui lui a donné le cancer.</li>
+        <li>Nick lui apporte une <mark>mallette pleine d'argent</mark> pour <mark>acheter son silence</mark>.</li>
+        <li>Il le manipule habilement, et Lorne accepte.</li>
+      </ul></div>
+      <div class="cell"><h4>L'article et le « spin »</h4><ul>
+        <li>Heather révèle tout : le MOD Squad, Hollywood, la mallette. Nick est <mark>humilié et congédié</mark>.</li>
+        <li>Spin : il révèle qu'elle a <mark>couché avec lui pour obtenir l'info</mark>, ce qui détruit sa crédibilité (attaque contre la personne).</li>
+        <li>Puis il brille à l'<mark>audience du Sénat</mark> en ramenant le débat à la liberté de choix et au rôle des parents.</li>
+      </ul></div>
+      <div class="cell"><h4>La fin justifie-t-elle les moyens?</h4><ul>
+        <li><b>Côté tabac</b> : mentir, acheter le silence de Lorne, financer des études complaisantes, séduire Hollywood.</li>
+        <li><b>Côté anti-tabac</b> : le sénateur veut <mark>effacer les cigarettes des vieux films</mark>. Des extrémistes <mark>enlèvent Nick et le couvrent de timbres de nicotine</mark>.</li>
+        <li><b>Côté média</b> : Heather couche avec sa source pour un scoop.</li>
+      </ul></div>
+    </div>
+    <div class="sub">
+      <h4>Sophismes du film, reliés au cours</h4>
+      <div class="tbl wide"><table>
+        <thead><tr><th>Scène</th><th>Sophisme</th></tr></thead>
+        <tbody>
+          <tr><td>Talk-show avec un ado atteint du cancer : les anti-tabac « profitent des morts » pour gonfler leurs budgets.</td><td>Attaque contre la personne</td></tr>
+          <tr><td>Journée carrière à l'école : « Ta mère est-elle médecin? Une experte? »</td><td>Attaque contre la personne (discréditer la source)</td></tr>
+          <tr><td>Crème glacée : Nick transforme le débat chocolat-vanille en débat sur la « liberté ».</td><td>Caricature (et déviation de la conversation)</td></tr>
+          <tr><td>Crème glacée : « J'ai prouvé que tu as tort, donc j'ai raison. »</td><td>Faux dilemme</td></tr>
+          <tr><td>Au Sénat : « Faut-il une tête de mort sur le cheddar du Vermont? »</td><td>Double faute</td></tr>
+          <tr><td>Les « scientifiques » de l'Academy qui ne trouvent jamais de lien avec le cancer.</td><td>Appel à l'autorité (expertise biaisée)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="memo"><span class="label">Lien avec le cours</span><p>Nick fait l'inverse des principes de l'argumentation : il vise à <b>persuader</b> (pas à convaincre rationnellement), sans <b>bonne foi</b> ni <b>faillibilité</b>. Il ne cherche pas la vérité. Scène de la crème glacée : « Je ne vise pas toi, je vise <b>eux</b> », c'est-à-dire le public. Avec Platon : Nick fabrique de la <b>doxa</b>, et le public ressemble aux prisonniers de la caverne qui regardent des ombres (publicités, films).</p></div>
+  </section>
+
+  <!-- BLOC 3 -->
+  <div class="group">
+    <span class="label">Bloc 3 · 6 thèmes</span>
+    <h2>Platon</h2>
+  </div>
+
+  <section class="fiche" id="s-platon" data-chip="Platon : repères">
+    <h3>Platon : les repères</h3>
+    <ul>
+      <li><mark>427–347 av. J.-C.</mark> Né à <mark>Athènes</mark>, dans une <mark>famille aristocratique</mark>.</li>
+      <li>Profondément marqué par la <mark>condamnation à mort de Socrate</mark> en <mark>399 av. J.-C.</mark></li>
+      <li>D'où sa <mark>méfiance envers l'opinion populaire et la démocratie athénienne</mark>.</li>
+      <li>Il fonde l'<mark>Académie</mark>.</li>
+      <li>Il écrit sous forme de <mark>dialogues</mark>, souvent avec <mark>Socrate comme personnage principal</mark>.</li>
+      <li>Son œuvre distingue l'<mark>opinion (la doxa)</mark> de la <mark>connaissance véritable (le logos)</mark>.</li>
+    </ul>
+    <div class="sub">
+      <h4>Pourquoi chercher une vérité stable?</h4>
+      <ul>
+        <li>Le <mark>monde sensible est changeant</mark>, les <mark>sens peuvent nous tromper</mark>.</li>
+        <li>Les opinions sont <mark>instables et souvent contradictoires</mark>.</li>
+        <li>Exemple : deux personnes en désaccord sur la beauté d'une œuvre. Cette diversité montre qu'il faut chercher <mark>le Beau en lui-même</mark>.</li>
+        <li>La philosophie sert à <mark>dépasser les apparences</mark> pour chercher ce qui est <mark>vrai en soi</mark>.</li>
+      </ul>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p><b>427</b> naissance · <b>399</b> mort de Socrate (Platon a 28 ans) · <b>347</b> mort de Platon. Retiens les mots de la prof : <b>doxa</b> = opinion, <b>logos</b> = connaissance véritable.</p></div>
+  </section>
+
+  <section class="fiche" id="s-formes" data-chip="Théorie des Formes">
+    <h3>La théorie des Formes</h3>
+    <ul>
+      <li>Elle est la base de l'<mark>épistémologie platonicienne</mark>.</li>
+      <li>Platon distingue le <mark>monde sensible</mark> et le <mark>monde intelligible</mark>.</li>
+      <li>Les <mark>Formes</mark> (ou <mark>Idées</mark>) sont les <mark>réalités stables</mark> qui permettent de comprendre les choses particulières.</li>
+      <li>Exemple : il existe <mark>plusieurs actions justes</mark>. Pour comprendre ce qui les rend justes, il faut chercher l'<mark>Idée de Justice</mark>. Idem pour le <mark>Beau, le Bien, le Courage, l'Égalité</mark>.</li>
+      <li>La connaissance véritable porte sur ce qui est <mark>stable, universel et intelligible</mark>.</li>
+    </ul>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Monde sensible</th><th>Monde intelligible</th></tr></thead>
+        <tbody>
+          <tr><td>Choses <mark>visibles, matérielles, changeantes</mark></td><td><mark>Formes ou Idées</mark>, stables et universelles</td></tr>
+          <tr><td>Perçu par les sens, qui peuvent tromper</td><td>Saisi par la raison</td></tr>
+          <tr><td>Opinion (doxa)</td><td>Connaissance véritable (logos)</td></tr>
+          <tr><td>Une action juste, une belle œuvre</td><td>La Justice, le Beau en soi</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p>Les 3 mots de la connaissance véritable : <b>S-U-I</b> = <b>S</b>table, <b>U</b>niversel, <b>I</b>ntelligible.</p></div>
+  </section>
+
+  <section class="fiche" id="s-caverne" data-chip="Allégorie de la caverne">
+    <h3>L'allégorie de la caverne</h3>
+    <p>Des prisonniers enchaînés au fond d'une caverne ne voient que des <mark>ombres</mark> sur le mur et les prennent pour la réalité. L'un d'eux est libéré : il monte, il est <mark>ébloui par la lumière</mark>, s'y habitue, découvre les choses réelles puis le <mark>Soleil</mark>. Il <mark>redescend</mark> pour en parler aux autres, qui lui résistent.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Dans l'allégorie</th><th>Ce que ça représente</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Les ombres</td><td>Les <mark>apparences</mark>, les opinions non examinées</td></tr>
+          <tr><td class="k">Les prisonniers</td><td>Nous, quand nous <mark>prenons l'apparence pour la réalité</mark></td></tr>
+          <tr><td class="k">La montée, l'éblouissement</td><td>L'<mark>éducation</mark> : la remise en question est <mark>difficile et inconfortable</mark></td></tr>
+          <tr><td class="k">L'extérieur</td><td>Le <mark>monde intelligible</mark> (les Formes)</td></tr>
+          <tr><td class="k">Le Soleil</td><td>L'<mark>Idée du Bien</mark></td></tr>
+          <tr><td class="k">Le retour dans la caverne</td><td>La <mark>responsabilité envers les autres</mark> et la <mark>résistance</mark> au philosophe</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="cell"><h4>Apparence et réalité</h4><ul>
+        <li>Ne pas confondre <mark>ce qui apparaît</mark> avec <mark>ce qui est réellement</mark>.</li>
+        <li>L'erreur des prisonniers ne vient <mark>pas seulement d'un manque d'information</mark> : ils <mark>prennent l'apparence pour la réalité</mark>.</li>
+        <li>Platon ne dit pas que <mark>« tout est faux »</mark> : notre accès spontané au réel peut être <mark>limité, déformé ou incomplet</mark>.</li>
+      </ul></div>
+      <div class="cell"><h4>Conviction et connaissance</h4><ul>
+        <li>Une <mark>conviction sincère n'est pas nécessairement justifiée</mark>.</li>
+        <li>Une opinion peut reposer sur l'<mark>habitude</mark> ou les <mark>croyances reçues</mark>.</li>
+        <li><mark>Croire ne suffit pas</mark> à justifier : la connaissance exige d'<mark>examiner les raisons</mark>.</li>
+      </ul></div>
+      <div class="cell"><h4>Apprendre, c'est difficile</h4><ul>
+        <li>Apprendre peut obliger à <mark>reconnaître nos erreurs</mark>.</li>
+        <li>La remise en question est <mark>inconfortable</mark>. Il faut parfois <mark>renoncer à nos certitudes</mark>.</li>
+        <li>La difficulté à s'habituer à la lumière illustre les <mark>obstacles</mark> devant une réalité nouvelle.</li>
+      </ul></div>
+      <div class="cell"><h4>Éduquer selon Platon</h4><ul>
+        <li>Ce n'est <mark>pas transmettre des informations à un individu passif</mark>.</li>
+        <li>C'est <mark>orienter l'esprit</mark>, <mark>transformer son regard</mark>, <mark>apprendre à juger autrement</mark>.</li>
+        <li>Le philosophe ne répète pas : il cherche à <mark>comprendre et justifier</mark> ce qu'il affirme.</li>
+      </ul></div>
+      <div class="cell"><h4>Le Soleil et l'Idée du Bien</h4><ul>
+        <li>Le Soleil <mark>rend possible la vision</mark> à l'extérieur.</li>
+        <li>Par analogie, l'Idée du Bien <mark>rend la connaissance possible</mark>.</li>
+        <li>Ce n'est <mark>pas ce que chacun trouve agréable</mark>.</li>
+        <li>Elle permet d'<mark>évaluer les actions et les réalités selon leur valeur</mark>.</li>
+      </ul></div>
+      <div class="cell"><h4>Le retour du prisonnier</h4><ul>
+        <li>Il pourrait rester dehors, mais son retour pose la question de la <mark>responsabilité envers les autres</mark>.</li>
+        <li>Doit-on <mark>partager</mark> une compréhension différente du monde?</li>
+        <li>Le philosophe rencontre de la <mark>résistance</mark> quand il remet en question les croyances établies.</li>
+        <li>Question du <mark>rôle du savoir dans la vie collective et politique</mark>.</li>
+      </ul></div>
+    </div>
+    <div class="sub">
+      <h4>Les 5 questions fondamentales de l'allégorie</h4>
+      <ol>
+        <li>Pourquoi certaines croyances nous paraissent-elles <mark>évidentes sans avoir été examinées</mark>?</li>
+        <li>Qu'est-ce qui distingue une <mark>conviction personnelle</mark> d'une <mark>connaissance justifiée</mark>?</li>
+        <li>Pourquoi la <mark>recherche de la vérité</mark> peut-elle être difficile?</li>
+        <li>Quel rôle l'<mark>éducation et la philosophie</mark> jouent-elles dans notre rapport au monde?</li>
+        <li>Quelle <mark>responsabilité</mark> avons-nous envers les autres quand nous remettons en question leurs croyances?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="fiche" id="s-role" data-chip="Rôle de la philosophie">
+    <h3>Le rôle de la philosophie</h3>
+    <ul>
+      <li>Elle <mark>transforme notre manière de penser</mark>.</li>
+      <li>Elle nous fait passer <mark>de l'opinion à la connaissance</mark> et nous apprend à <mark>questionner les apparences</mark>.</li>
+      <li>Elle <mark>oriente l'âme vers le vrai, le juste et le bien</mark>.</li>
+      <li>Elle a une <mark>dimension morale</mark> : mieux connaître le bien permet de <mark>mieux orienter sa vie</mark>.</li>
+      <li>Elle demande un <mark>effort</mark> : il ne suffit pas d'avoir une opinion correcte, il faut <mark>éduquer l'âme</mark> à chercher le vrai.</li>
+      <li>L'État devrait être <mark>gouverné par des philosophes</mark>, car ils <mark>contemplent les Idées pour ce qu'elles sont en elles-mêmes</mark>.</li>
+    </ul>
+    <div class="memo"><span class="label">Truc mémo</span><p>Le trio <b>vrai, juste, bien</b> revient partout chez Platon. La philosophie <b>transforme</b>, <b>questionne</b>, <b>oriente</b>.</p></div>
+  </section>
+
+  <section class="fiche" id="s-ame" data-chip="Âme tripartite">
+    <h3>La compréhension tripartite de l'âme</h3>
+    <p>Dans <mark>La République</mark>, Platon distingue <mark>trois parties de l'âme</mark>. Elles peuvent <mark>entrer en conflit</mark> quand elles poussent l'individu vers des actions différentes.</p>
+    <div class="tbl wide">
+      <table>
+        <thead><tr><th>Partie</th><th>Ce qu'elle fait</th><th>Vertu</th><th>Groupe de la cité</th></tr></thead>
+        <tbody>
+          <tr><td class="k"><mark>Raison</mark></td><td>Cherche la <mark>vérité</mark>, réfléchit à <mark>ce qu'il convient de faire</mark></td><td><mark>Sagesse</mark> : détermine ce qui est bon pour l'ensemble de l'âme</td><td><mark>Philosophes-rois</mark></td></tr>
+          <tr><td class="k"><mark>Ardeur</mark></td><td>Liée au <mark>courage</mark>, à l'<mark>indignation</mark> et au <mark>désir de reconnaissance</mark></td><td><mark>Courage</mark> : maintient les décisions de la raison malgré les difficultés et tentations</td><td><mark>Gardiens</mark> (auxiliaires)</td></tr>
+          <tr><td class="k"><mark>Désir</mark></td><td><mark>Besoins et plaisirs</mark> : nourriture, biens matériels, satisfactions physiques</td><td>Doit être dirigé par la raison</td><td><mark>Producteurs</mark></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="cell"><h4>Tempérance</h4><p>L'<mark>accord entre les parties</mark> de l'âme, qui <mark>reconnaissent le rôle directeur de la raison</mark>.</p></div>
+      <div class="cell"><h4>Justice</h4><p>L'<mark>harmonie de l'ensemble</mark>, quand <mark>chaque partie accomplit correctement sa fonction</mark>.</p></div>
+    </div>
+    <div class="sub">
+      <h4>L'alignement de l'âme et la vertu</h4>
+      <ul>
+        <li>Être vertueux, ce n'est <mark>pas simplement respecter des règles</mark> ou faire <mark>une bonne action occasionnelle</mark>.</li>
+        <li>La vertu suppose une <mark>organisation harmonieuse de l'âme</mark>, où <mark>la raison dirige les désirs et l'ardeur</mark>.</li>
+        <li>La personne juste <mark>ne supprime pas ses désirs</mark> : elle apprend à les <mark>maîtriser et à les orienter</mark>.</li>
+        <li>Si les désirs dominent, on privilégie les <mark>plaisirs immédiats</mark> au détriment de ce qui est <mark>véritablement bon</mark>.</li>
+        <li>La justice individuelle = un <mark>ordre intérieur</mark> où chaque partie joue son rôle.</li>
+      </ul>
+    </div>
+    <div class="sub">
+      <h4>Le conflit intérieur et la maîtrise de soi</h4>
+      <ul>
+        <li>On peut <mark>savoir ce qu'on devrait faire</mark> tout en étant <mark>attiré par un plaisir immédiat</mark>.</li>
+        <li>L'<mark>ardeur peut soutenir la raison</mark> pour résister aux désirs.</li>
+        <li>La <mark>sagesse discerne</mark> ce qui est bon, le <mark>courage maintient</mark> la bonne décision.</li>
+        <li>La vertu exige <mark>plus qu'une bonne intention</mark> : un <mark>équilibre durable entre la réflexion, les émotions et les désirs</mark>.</li>
+      </ul>
+    </div>
+    <div class="memo"><span class="label">Truc mémo</span><p>Image pour retenir : <b>Raison = tête</b>, <b>Ardeur = cœur</b>, <b>Désir = ventre</b>. On descend la ligne : Raison, Sagesse, Philosophes · Ardeur, Courage, Gardiens · Désir, Producteurs.</p></div>
+    <div class="piege"><span class="label">Piège d'examen</span><p>La <b>tempérance</b> n'appartient pas à une seule partie : c'est l'<b>accord</b> de toutes les parties. La <b>justice</b>, c'est l'<b>harmonie</b> : chacun sa fonction.</p></div>
+  </section>
+
+  <section class="fiche" id="s-politique" data-chip="Philosophie politique">
+    <h3>La philosophie politique de Platon</h3>
+    <p>Platon établit une <mark>analogie entre les trois parties de l'âme et les trois groupes de sa cité idéale</mark>.</p>
+    <div class="tbl wide">
+      <table>
+        <thead><tr><th>Groupe</th><th>Partie de l'âme</th><th>Fonction</th><th>Vertu</th></tr></thead>
+        <tbody>
+          <tr><td class="k"><mark>Philosophes-rois</mark></td><td>Raison</td><td><mark>Gouvernent selon leur connaissance du Bien</mark></td><td><mark>Sagesse</mark> : décider en fonction du <mark>bien commun</mark></td></tr>
+          <tr><td class="k"><mark>Gardiens</mark> ou <mark>auxiliaires</mark></td><td>Ardeur</td><td><mark>Défendent la cité avec courage et discipline</mark></td><td><mark>Courage</mark> : défendre les décisions justes et protéger la cité</td></tr>
+          <tr><td class="k"><mark>Producteurs</mark></td><td>Désir</td><td><mark>Artisans, agriculteurs, commerçants</mark> : répondent aux <mark>besoins matériels</mark></td><td>(participent à la tempérance)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="cell"><h4>Tempérance dans la cité</h4><p>L'<mark>accord entre les différents groupes</mark> concernant la <mark>direction de la cité</mark>.</p></div>
+      <div class="cell"><h4>Justice dans la cité</h4><p><mark>Chaque groupe accomplit sa fonction sans chercher à usurper celle des autres</mark>. La cité est dirigée par <mark>les mieux aptes à gouverner</mark>.</p></div>
+    </div>
+    <div class="sub">
+      <h4>Justice individuelle et justice politique</h4>
+      <ul>
+        <li>Un <mark>principe commun</mark> : <mark>chaque partie doit remplir sa fonction dans un ensemble ordonné</mark>.</li>
+        <li>Âme : la raison dirige. Cité : les philosophes gouvernent, les gardiens protègent, les producteurs répondent aux besoins.</li>
+        <li>La justice n'est <mark>pas seulement respecter des lois</mark> : c'est <mark>maintenir une organisation harmonieuse</mark>.</li>
+        <li>Elle suppose que les individus ont des <mark>aptitudes différentes</mark>.</li>
+      </ul>
+    </div>
+    <div class="sub">
+      <h4>Une conception contestable</h4>
+      <ul>
+        <li>La cité est juste quand chacun contribue au <mark>bien commun selon ses aptitudes</mark>.</li>
+        <li>Les philosophes ont une <mark>autorité politique supérieure</mark>, à cause de leur connaissance supposée du Bien.</li>
+        <li>Question de la <mark>légitimité du pouvoir</mark> : <mark>qui peut déterminer les aptitudes</mark> de chacun et <mark>reconnaître les véritables sages</mark>?</li>
+        <li>Tension entre <mark>l'harmonie collective et la liberté individuelle</mark>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="fiche" id="s-liberte" data-chip="Liberté et maîtrise de soi">
+    <h3>La liberté et la maîtrise de soi</h3>
+    <ul>
+      <li>La liberté <mark>ne consiste pas à satisfaire tous ses désirs</mark>.</li>
+      <li>Quand un désir prend le contrôle, la personne <mark>néglige ce qu'elle juge pourtant bon</mark>.</li>
+      <li>Elle devient <mark>dépendante de ses impulsions</mark> plutôt que <mark>maîtresse de ses décisions</mark>. Elle est conduite par <mark>ce qu'il y a de moins rationnel en elle</mark>.</li>
+      <li>Être libre, c'est pouvoir <mark>examiner ses désirs</mark> et <mark>décider s'il est raisonnable de les satisfaire</mark>.</li>
+      <li>Exemple du cours : vouloir <mark>réussir un examen</mark> mais interrompre son étude pour les <mark>réseaux sociaux</mark>.</li>
+      <li>La maîtrise de soi <mark>ne supprime pas les désirs</mark> : elle leur donne une <mark>place appropriée</mark>.</li>
+      <li>Guidé par la raison, on peut <mark>résister à une impulsion</mark>.</li>
+      <li>La liberté suppose un <mark>ordre intérieur</mark> où les désirs ne déterminent pas seuls la conduite.</li>
+      <li>La connaissance remet en question les apparences et les plaisirs, mais <mark>comprendre le bien ne suffit pas</mark> : il faut être <mark>capable d'agir en conséquence</mark>.</li>
+      <li>La liberté = <mark>capacité à diriger sa propre conduite</mark> plutôt qu'à <mark>subir ses impulsions</mark>.</li>
+      <li>Elle contribue à l'<mark>harmonie de l'âme</mark> et à la <mark>justice dans la personne</mark>.</li>
+    </ul>
+    <div class="memo"><span class="label">Truc mémo</span><p>Celui qui suit tous ses désirs n'est pas libre, il est <b>esclave de ses impulsions</b>. Libre = <b>la raison tient le volant</b>.</p></div>
+  </section>
+</div>
+
+<!-- ===================== CARTES ===================== -->
+<div class="view" id="view-cartes" role="tabpanel" aria-labelledby="tab-cartes" hidden>
+  <div class="panel">
+    <div class="controls">
+      <label class="label" for="cards-theme">Thème</label>
+      <select id="cards-theme"></select>
+      <label class="check"><input type="checkbox" id="cards-review"> Seulement mes « À revoir »</label>
+      <button class="btn" id="cards-shuffle">Mélanger</button>
+      <button class="btn" id="cards-reset">Remettre à zéro</button>
+    </div>
+    <div class="stats" id="cards-stats"></div>
+  </div>
+  <div class="flash" id="flash">
+    <div class="meta"><span class="label" id="flash-theme"></span><span class="label" id="flash-pos"></span></div>
+    <p class="q" id="flash-q"></p>
+    <p class="a" id="flash-a" hidden></p>
+  </div>
+  <div class="row">
+    <button class="btn primary" id="flash-reveal">Voir la réponse</button>
+    <button class="btn good" id="flash-know" hidden>Je savais</button>
+    <button class="btn bad" id="flash-again" hidden>À revoir</button>
+    <button class="btn" id="flash-prev">Précédente</button>
+    <button class="btn" id="flash-next">Suivante</button>
+  </div>
+  <p class="kbd">Clavier : Espace = réponse · 1 = je savais · 2 = à revoir · flèches = naviguer</p>
+</div>
+
+<!-- ===================== QUIZ ===================== -->
+<div class="view" id="view-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+  <div class="panel">
+    <div class="controls">
+      <label class="label" for="quiz-theme">Thème</label>
+      <select id="quiz-theme"></select>
+      <button class="btn" id="quiz-restart">Nouveau quiz</button>
+    </div>
+    <div class="stats" id="quiz-stats"></div>
+    <div class="bar"><i id="quiz-bar"></i></div>
+  </div>
+  <div class="panel qz" id="quiz-box"></div>
+</div>
+
+<!-- ===================== DÉVELOPPEMENT ===================== -->
+<div class="view" id="view-developpement" role="tabpanel" aria-labelledby="tab-developpement" hidden>
+  <div class="memo">
+    <span class="label">Gabarit pour une question à développement</span>
+    <ol>
+      <li><b>Réponds clairement</b> à la question en une phrase (ta thèse).</li>
+      <li><b>Définis</b> les concepts avec les mots exacts du cours.</li>
+      <li><b>Explique</b> la position de Platon (ou le concept du cours) et fais le lien avec la question.</li>
+      <li>Donne <b>deux exemples concrets</b> et explique en quoi ils soutiennent ta position.</li>
+      <li>Termine par une <b>nuance</b> ou une limite, puis une phrase synthèse.</li>
+    </ol>
+  </div>
+  <div class="dev" id="dev"></div>
+</div>
+
+</main>
+
+<script>
+const THEMES = {
+  discours: "Types de discours",
+  principes: "Principes de l'argumentation",
+  jugements: "Types de jugements",
+  raisonnement: "Structure du raisonnement",
+  deduction: "Déductif et inductif",
+  evaluation: "Acceptabilité, pertinence, suffisance",
+  sophismes: "Sophismes",
+  film: "Thank You for Smoking",
+  platon: "Platon : repères",
+  formes: "Théorie des Formes",
+  caverne: "Allégorie de la caverne",
+  role: "Rôle de la philosophie",
+  ame: "Âme tripartite",
+  politique: "Philosophie politique",
+  liberte: "Liberté et maîtrise de soi"
+};
+
+const CARDS = [
+  ["discours","Quels sont les 4 types de discours?","Magico-superstitieux, religieux, scientifique, philosophique."],
+  ["discours","Quel discours explique un phénomène avec des entités magiques ou surnaturelles?","Le discours magico-superstitieux. Il s'appuie sur la croyance et non la raison."],
+  ["discours","Quel est l'objectif du discours magico-superstitieux? Que peut-il être?","Apaiser les anxiétés venant de l'inconnu.\nIl peut être erroné, divertissant ou manipulateur."],
+  ["discours","Quel discours cherche à donner du sens en s'appuyant sur la croyance?","Le discours religieux. Il répond à des questions fondamentales (mort, souffrance, amour), donne une orientation à nos actions et sert de guide spirituel."],
+  ["discours","Pourquoi le discours religieux accepte-t-il une part de croyance?","Parce que le réel peut dépasser ce que la raison peut saisir."],
+  ["discours","Comment procède le discours scientifique?","Il part d'une hypothèse, se base sur des expériences et l'analyse des données recueillies pour tirer des conclusions vérifiables."],
+  ["discours","Quelle est la marque du discours scientifique?","La précision et l'exactitude, d'où l'importance de vérifier les sources."],
+  ["discours","Le discours scientifique cherche-t-il à apaiser l'anxiété?","Non. Il contient une intention de prévision ou de contrôle."],
+  ["discours","Doit-on accepter les conclusions scientifiques qui vont contre notre intuition?","Oui, même si elles vont à l'encontre de notre intuition ou de notre volonté."],
+  ["discours","Quel exemple de discours magico-superstitieux imite la méthode scientifique?","Les théories du complot."],
+  ["discours","Quelles sont les 5 questions pour rester critique?","1. Comment se construit l'argumentaire?\n2. Les personnes citées sont-elles des autorités dans le domaine et font-elles consensus?\n3. La théorie implique-t-elle de renier toutes les sources officielles?\n4. Joue-t-elle sur nos sentiments?\n5. Rejette-t-elle toute remise en question?"],
+  ["discours","Qu'est-ce qui distingue le discours philosophique du discours scientifique?","Les deux reposent sur la raison, mais la philosophie cherche à donner du sens, alors que la science veut simplement expliquer des phénomènes."],
+  ["discours","Sur quoi est fondée la rationalité du discours philosophique?","Sur l'argumentation et l'évaluation de celle-ci."],
+  ["discours","Quel est le premier pas vers la recherche rationnelle de la vérité?","Le doute face à nos opinions et à nos connaissances."],
+
+  ["principes","Qu'est-ce que la logique?","La discipline philosophique qui se soucie de la rectitude du raisonnement."],
+  ["principes","Logique formelle vs logique informelle?","Formelle = symbolisme.\nInformelle = argumentation."],
+  ["principes","L'aptitude au raisonnement est-elle innée?","L'aptitude est innée, mais les règles et normes du raisonnement doivent être apprises."],
+  ["principes","Quels sont les 4 principes de l'argumentation?","1. Respect des règles de l'échange\n2. Charité envers autrui\n3. Faillibilité\n4. Accord des esprits"],
+  ["principes","Que comprend le respect des règles de l'échange?","La recherche communautaire de la connaissance et de la vérité ; la bonne foi ; ne pas tromper volontairement, dévier la conversation ou faire appel à la persuasion."],
+  ["principes","Qu'exige le principe de charité?","S'il y a place à l'interprétation, opter pour la plus favorable ; donner le bénéfice du doute, être généreux sans faire de concessions invalides."],
+  ["principes","Qu'exige le principe de faillibilité?","Remettre en question nos opinions face à une réfutation rationnelle ; viser la vérité et non la confirmation de nos opinions ; argumenter rationnellement toute opinion."],
+  ["principes","Qu'exige le principe de l'accord des esprits?","La position rationnelle révélée ne peut pas être imposée aux personnes à l'extérieur de la communauté de recherche ; reprendre la discussion avec d'autres interlocuteurs pour éviter un dogmatisme."],
+
+  ["jugements","Quels sont les autres noms de la proposition?","Assertion ou jugement."],
+  ["jugements","Quelles phrases ne sont pas des propositions?","Les phrases impératives et interrogatives."],
+  ["jugements","Nomme 4 caractéristiques de la proposition.","Matériau de base de l'argumentation ; assertion déclarative faite par une personne ; on peut dire « cela est vrai » ou « cela est faux » ; une phrase peut en contenir plusieurs."],
+  ["jugements","Donne les 4 types de jugements et leur autre nom.","Fait = proposition empirique\nPréférence = jugement de goût\nValeur = proposition d'appréciation\nPrescription = proposition d'obligation"],
+  ["jugements","Sur quoi porte un jugement de fait?","Sur l'existence ou l'inexistence dans la réalité sensible. Il vise une description neutre et objective, sans éléments subjectifs ou de préférence."],
+  ["jugements","Quelles sont les 4 subdivisions du jugement de fait?","Singulière : Cet arbre est vert.\nParticulière : Certains arbres sont verts.\nUniverselle : Tous les arbres sont verts.\nIndéfinie : L'arbre est vert."],
+  ["jugements","Comment qualifier la véracité d'un jugement de fait?","Vrai, faux ou probable. La méthode d'évaluation dépend du type de fait (la météo aujourd'hui vs le nombre de tentacules d'une pieuvre)."],
+  ["jugements","Quelle utilité a le jugement de préférence en argumentation?","Aucune. Purement subjectif, il ne fait pas avancer l'argumentation et n'a pas sa place dans un débat rationnel. Sa véracité repose uniquement sur les goûts individuels."],
+  ["jugements","Définis le jugement de valeur.","On déclare qu'une chose est digne ou non d'estime sur le plan moral. C'est l'essence des discours éthiques et politiques. Il a une part de subjectivité et d'objectivité."],
+  ["jugements","Quels critères pour évaluer un jugement de valeur?","La cohérence et la pertinence, et la véracité des jugements de fait qui le sous-tendent."],
+  ["jugements","Définis le jugement de prescription.","On invite une personne à adopter un comportement ou à agir d'une certaine manière. Il repose sur des jugements de fait ou de valeur."],
+  ["jugements","Comment évaluer un jugement de prescription?","Évaluer la véracité des jugements qui le sous-tendent et analyser la pertinence et la suffisance des arguments qui le soutiennent."],
+  ["jugements","« Tu devrais dire la vérité. » Quel jugement?","Prescription."],
+  ["jugements","« Je préfère le café au thé. » Quel jugement?","Préférence."],
+  ["jugements","« Il pleut dehors. » Quel jugement?","Fait (empirique)."],
+
+  ["raisonnement","Qu'est-ce qu'un raisonnement?","Un type particulier de discours utilisé pour convaincre rationnellement : démontrer que la conclusion est vraie sur la base de sa relation avec les prémisses."],
+  ["raisonnement","Dans un raisonnement bien formé, quelle est la relation entre P et C?","P justifie rationnellement C, et C est une conséquence logique de P."],
+  ["raisonnement","La vérité des prémisses implique…?","…que la conclusion est vraie ou acceptable."],
+
+  ["deduction","Raisonnement déductif : direction?","Du général au particulier."],
+  ["deduction","Raisonnement inductif : direction?","Du particulier au général."],
+  ["deduction","Déductif : si les prémisses sont vraies…?","La conclusion est nécessairement vraie : elle est contenue logiquement dans les prémisses. Il sert à démontrer avec certitude (validité logique)."],
+  ["deduction","Inductif : si les prémisses sont vraies…?","La conclusion est probable, mais non certaine : elle dépasse ce que contiennent les prémisses. Il sert à formuler des généralisations basées sur l'observation."],
+  ["deduction","Quel type de raisonnement faisons-nous le plus au quotidien?","Le raisonnement inductif."],
+  ["deduction","Quels sont les 3 exemples d'induction du cours?","Le soleil se lèvera demain ; les 20 étudiants qui préfèrent étudier avec de la musique (groupe limité) ; le café le soir qui empêche de dormir (relation causale probable)."],
+
+  ["evaluation","Quels sont les 3 critères pour évaluer un raisonnement?","Acceptabilité des prémisses, pertinence, suffisance."],
+  ["evaluation","Quand un jugement de fait est-il acceptable?","S'il est vrai ou probable. On s'appuie sur des observations fiables, des preuves solides, des données validées, des sources crédibles et des expertises pertinentes."],
+  ["evaluation","Quand un jugement de valeur est-il acceptable?","On évalue séparément les jugements de fait qui le soutiennent, et on s'assure qu'il contient une partie objective (sinon c'est une préférence)."],
+  ["evaluation","Quand un jugement de prescription est-il acceptable?","On évalue séparément ses jugements de fait, puis la nature et l'effet de la prescription : faisabilité, lien avec l'objectif, conséquences."],
+  ["evaluation","Qu'est-ce que la pertinence?","Les prémisses doivent avoir un lien clair et direct avec la conclusion. Il n'y a pas de critère précis : il faut du sens critique."],
+  ["evaluation","Qu'est-ce que la suffisance?","Même acceptables et pertinentes, les prémisses doivent être assez fortes pour établir la conclusion. En induction, elle indique le degré de probabilité."],
+  ["evaluation","Quels raisonnements ont une parfaite suffisance?","Seulement les raisonnements déductifs."],
+  ["evaluation","« Ambre fait de la moto. Il y a eu un vol. Donc Ambre a volé. » Quel critère échoue?","La pertinence."],
+  ["evaluation","« La chaussée est mouillée, donc il pleut. » Quel critère échoue?","La suffisance."],
+
+  ["sophismes","Qu'est-ce qu'un sophisme?","Un raisonnement non conforme aux règles de la logique, consciemment utilisé pour tromper autrui. Il a l'apparence de la rationalité mais vise à persuader et non à convaincre rationnellement."],
+  ["sophismes","Tout sophisme contient un défaut de…?","Acceptabilité, pertinence ou suffisance."],
+  ["sophismes","Quels sont les 2 sophismes d'acceptabilité?","Appel à l'autorité, faux dilemme."],
+  ["sophismes","Quels sont les 6 sophismes de pertinence?","Attaque contre la personne, double faute, caricature, appel à la popularité, appel à la modernité (nouveauté), lien causal douteux."],
+  ["sophismes","Quels sont les 3 sophismes de suffisance?","Généralisation hâtive, pente fatale, affirmation du conséquent."],
+  ["sophismes","Appel à l'autorité?","Invoquer l'autorité d'un expert qui n'a pas de compétence sur le sujet. Ex. : The Rock et le camion Ford."],
+  ["sophismes","Faux dilemme?","Imposer un choix entre deux options qui implique le rejet de l'option non choisie. Ex. : réduire les dépenses ou l'économie s'effondre."],
+  ["sophismes","Attaque contre la personne?","Attaquer l'individu ou l'institution au lieu de réfuter le raisonnement. Ex. : « tu conduis un VUS »."],
+  ["sophismes","Double faute?","Justifier une opinion par les fautes commises par autrui. Ex. : « je suivais le trafic »."],
+  ["sophismes","Caricature?","Déformer la position de quelqu'un pour la réfuter plus facilement. Ex. : réduire les téléphones, donc interdire toute technologie."],
+  ["sophismes","Appel à la popularité?","Fonder la crédibilité d'une opinion sur le fait qu'une grande partie de la population y croit."],
+  ["sophismes","Appel à la modernité (nouveauté)?","Fonder la valeur d'une croyance sur son originalité ou son avant-gardisme. Ex. : le téléphone qui vient de sortir."],
+  ["sophismes","Lien causal douteux?","Supposer une relation de cause à effet sans preuve. Ex. : nouveau téléphone, donc mauvaises notes."],
+  ["sophismes","Généralisation hâtive?","Tirer une conclusion générale à partir d'un nombre insuffisant de cas."],
+  ["sophismes","Pente fatale?","Affirmer qu'une action entraînera une série de conséquences extrêmes, sans preuve suffisante."],
+  ["sophismes","Affirmation du conséquent?","Affirmer qu'une condition nécessaire est suffisante. Ex. : il y a des nuages, donc il pleut."],
+
+  ["film","Que veut dire MOD Squad et qui en fait partie?","« Merchants Of Death » (marchands de la mort) : Nick (tabac), Polly (alcool), Bobby Jay (armes à feu)."],
+  ["film","Comment Nick justifie-t-il son travail?","Il doit « payer l'hypothèque » comme tout le monde ; il est doué pour argumenter ; il dit défendre la liberté de choix."],
+  ["film","Quel est le contrat entre le tabac et le cinéma?","Faire fumer des vedettes dans des films. Le tabac gagne une image glamour (pub déguisée), Hollywood reçoit de l'argent."],
+  ["film","Que se passe-t-il avec l'ancien Marlboro Man?","Lorne Lutch, atteint d'un cancer, dénonce le tabac. Nick lui apporte une mallette d'argent pour acheter son silence, et il accepte."],
+  ["film","Quel impact a l'article de Heather Holloway? Comment Nick fait-il son « spin »?","Elle révèle ses confidences, et Nick est congédié. Il révèle qu'elle a couché avec lui pour l'info (sa crédibilité s'effondre), puis il brille à l'audience du Sénat."],
+  ["film","Quels procédés Nick utilise-t-il dans la scène de la crème glacée?","Il caricature la position de Joey, dévie le débat vers la « liberté de choix » et dit « si tu as tort, j'ai raison » (faux dilemme). Il vise le public, pas Joey."],
+  ["film","« Si tu argumentes correctement, tu n'as jamais tort » : qu'est-ce qui manque?","La visée de la vérité (faillibilité, bonne foi). Nick confond persuader et convaincre rationnellement."],
+  ["film","Exemple de « la fin justifie les moyens » du côté anti-tabac?","Le sénateur veut effacer les cigarettes des vieux films ; des extrémistes enlèvent Nick et le couvrent de timbres de nicotine."],
+  ["film","L'argument du cheddar du Vermont au Sénat : quel sophisme?","La double faute : d'autres produits tuent aussi, donc on ne devrait pas viser la cigarette."],
+
+  ["platon","Quelles sont les dates de Platon?","427–347 av. J.-C."],
+  ["platon","Quel événement marque profondément Platon?","La condamnation à mort de Socrate en 399 av. J.-C."],
+  ["platon","Quelle conséquence la mort de Socrate a-t-elle sur sa pensée?","Une méfiance envers l'opinion populaire et la démocratie athénienne."],
+  ["platon","Quelle institution Platon fonde-t-il?","L'Académie."],
+  ["platon","Sous quelle forme écrit-il?","Des dialogues, souvent avec Socrate comme personnage principal."],
+  ["platon","Doxa vs logos?","Doxa = opinion.\nLogos = connaissance véritable."],
+  ["platon","Pourquoi faut-il chercher le Beau en lui-même?","Parce que deux personnes peuvent ne pas s'entendre sur la beauté d'une œuvre : la diversité des opinions montre qu'il faut dépasser les apparences."],
+
+  ["formes","Quels sont les deux mondes de Platon?","Le monde sensible (visible, matériel, changeant) et le monde intelligible (les Formes ou Idées)."],
+  ["formes","Que sont les Formes?","Les réalités stables qui permettent de comprendre les choses particulières."],
+  ["formes","Explique l'exemple de la Justice.","Il existe plusieurs actions justes. Pour comprendre ce qui les rend justes, il faut chercher l'Idée de Justice. Même chose pour le Beau, le Bien, le Courage, l'Égalité."],
+  ["formes","Sur quoi porte la connaissance véritable?","Sur ce qui est stable, universel et intelligible."],
+  ["formes","La théorie des Formes est la base de quoi?","De l'épistémologie platonicienne."],
+
+  ["caverne","Que voient les prisonniers?","Des ombres, qu'ils prennent pour la réalité, car ils n'ont jamais vu autre chose."],
+  ["caverne","D'où vient l'erreur des prisonniers?","Pas seulement d'un manque d'information : du fait qu'ils prennent l'apparence pour la réalité."],
+  ["caverne","L'allégorie dit-elle que « tout est faux »?","Non. Notre accès spontané au réel peut être limité, déformé ou incomplet."],
+  ["caverne","Une conviction sincère est-elle une connaissance?","Non, elle n'est pas nécessairement justifiée. Croire ne suffit pas : la connaissance exige d'examiner les raisons."],
+  ["caverne","Sur quoi une opinion peut-elle reposer?","Sur l'habitude ou les croyances reçues."],
+  ["caverne","Que représente l'éblouissement du prisonnier?","Les obstacles qu'on rencontre en découvrant une réalité inconnue : se remettre en question est inconfortable."],
+  ["caverne","Qu'est-ce qu'éduquer pour Platon?","Pas transmettre des informations à un individu passif : orienter l'esprit, transformer son regard, apprendre à juger autrement."],
+  ["caverne","Que représente le Soleil?","L'Idée du Bien. Elle rend la connaissance possible et permet d'évaluer les actions et les réalités selon leur valeur."],
+  ["caverne","L'Idée du Bien, est-ce ce que chacun trouve agréable?","Non. Elle ne désigne pas simplement ce que chaque personne considère comme agréable ou souhaitable."],
+  ["caverne","Quelles questions soulève le retour du prisonnier?","La responsabilité envers les autres, la résistance face au philosophe et le rôle du savoir dans la vie collective et politique."],
+  ["caverne","Quelles sont les 5 questions fondamentales de l'allégorie?","1. Pourquoi certaines croyances paraissent-elles évidentes sans examen?\n2. Conviction personnelle vs connaissance justifiée?\n3. Pourquoi la recherche de la vérité est-elle difficile?\n4. Quel rôle pour l'éducation et la philosophie?\n5. Quelle responsabilité envers les autres quand on remet en question leurs croyances?"],
+
+  ["role","Quel est le rôle de la philosophie selon Platon?","Elle transforme notre manière de penser, fait passer de l'opinion à la connaissance, apprend à questionner les apparences et oriente l'âme vers le vrai, le juste et le bien."],
+  ["role","Quelle est la dimension morale de la philosophie?","Mieux connaître le bien permet de mieux orienter sa vie."],
+  ["role","Pourquoi la philosophie demande-t-elle un effort?","Il ne suffit pas d'avoir une opinion correcte : il faut éduquer l'âme à chercher ce qui est vrai."],
+  ["role","Pourquoi les philosophes devraient-ils gouverner?","Parce qu'ils contemplent les Idées pour ce qu'elles sont en elles-mêmes."],
+
+  ["ame","Dans quelle œuvre Platon distingue-t-il les parties de l'âme?","La République."],
+  ["ame","Quelles sont les 3 parties de l'âme?","La raison, l'ardeur, le désir."],
+  ["ame","Que fait la raison?","Elle cherche la vérité et réfléchit à ce qu'il convient de faire."],
+  ["ame","À quoi est liée l'ardeur?","Au courage, à l'indignation et au désir de reconnaissance."],
+  ["ame","À quoi correspond le désir?","Aux besoins et aux plaisirs : nourriture, biens matériels, satisfactions physiques."],
+  ["ame","Quelle est la vertu de la raison?","La sagesse : déterminer ce qui est bon pour l'ensemble de l'âme."],
+  ["ame","Quelle est la vertu de l'ardeur?","Le courage : maintenir les décisions de la raison malgré les difficultés et les tentations."],
+  ["ame","Qu'est-ce que la tempérance?","L'accord entre les différentes parties de l'âme, qui reconnaissent le rôle directeur de la raison."],
+  ["ame","Qu'est-ce que la justice dans l'âme?","L'harmonie de l'ensemble, quand chaque partie accomplit correctement sa fonction."],
+  ["ame","Une personne juste supprime-t-elle ses désirs?","Non. Elle apprend à les maîtriser et à les orienter."],
+  ["ame","Être vertueux, est-ce respecter des règles?","Non. La vertu est une organisation harmonieuse de l'âme où la raison dirige les désirs et l'ardeur. Elle exige plus qu'une bonne intention : un équilibre durable entre réflexion, émotions et désirs."],
+
+  ["politique","Quels sont les 3 groupes de la cité et leur partie de l'âme?","Philosophes-rois = raison\nGardiens (auxiliaires) = ardeur\nProducteurs (artisans, agriculteurs, commerçants) = désir"],
+  ["politique","Quelle est la vertu des dirigeants?","La sagesse : prendre les décisions en fonction du bien commun."],
+  ["politique","Quelle est la vertu des gardiens?","Le courage : défendre les décisions justes et protéger la cité."],
+  ["politique","Qu'est-ce que la tempérance dans la cité?","L'accord entre les différents groupes concernant la direction de la cité."],
+  ["politique","Qu'est-ce que la justice dans la cité?","Chaque groupe accomplit sa fonction sans chercher à usurper celle des autres."],
+  ["politique","Quel principe commun relie justice individuelle et justice politique?","Chaque partie doit remplir sa fonction dans un ensemble ordonné."],
+  ["politique","Pourquoi la conception de Platon est-elle contestable?","Elle pose la question de la légitimité du pouvoir (qui détermine les aptitudes? qui reconnaît les vrais sages?) et une tension entre harmonie collective et liberté individuelle."],
+
+  ["liberte","Selon Platon, être libre, est-ce satisfaire ses désirs?","Non. Être libre, c'est pouvoir examiner ses désirs et décider s'il est raisonnable de les satisfaire (maîtrise rationnelle)."],
+  ["liberte","Que devient une personne dominée par un désir?","Dépendante de ses impulsions plutôt que maîtresse de ses décisions ; conduite par ce qu'il y a de moins rationnel en elle."],
+  ["liberte","Quel est l'exemple du cours?","Une personne veut réussir un examen, mais interrompt son étude pour consulter les réseaux sociaux."],
+  ["liberte","La maîtrise de soi, est-ce supprimer ses désirs?","Non : c'est leur donner une place appropriée."],
+  ["liberte","Comprendre ce qui est bon suffit-il?","Non. Il faut aussi être capable d'agir en conséquence."],
+  ["liberte","À quoi contribue la maîtrise de soi?","À l'harmonie de l'âme et à la justice dans la personne."]
+];
+
+const QUIZ = [
+  {t:"discours", q:"« Vise à apaiser les anxiétés venant de l'inconnu. » De quel discours s'agit-il?", o:["Magico-superstitieux","Religieux","Scientifique","Philosophique"], a:0, e:"Le magico-superstitieux explique un phénomène par la croyance pour apaiser l'anxiété face à l'inconnu."},
+  {t:"discours", q:"Quel discours donne du sens en faisant appel à la raison?", o:["Philosophique","Religieux","Scientifique","Magico-superstitieux"], a:0, e:"Raison + sens = philosophique. Raison + expliquer = scientifique."},
+  {t:"discours", q:"Le discours scientifique contient une intention de…", o:["prévision ou de contrôle","donner du sens à la souffrance","servir de guide spirituel","apaiser l'anxiété"], a:0, e:"Il ne cherche pas à apaiser l'anxiété : il vise la prévision ou le contrôle."},
+  {t:"discours", q:"Laquelle n'est PAS une des questions pour rester critique?", o:["La théorie est-elle très partagée sur les réseaux sociaux?","Les personnes citées font-elles consensus?","La théorie rejette-t-elle toute remise en question?","La théorie joue-t-elle sur nos sentiments?"], a:0, e:"Les 5 questions : argumentaire, autorités et consensus, renier les sources officielles, sentiments, rejet de toute remise en question."},
+  {t:"discours", q:"Le discours religieux se distingue du magico-superstitieux surtout parce qu'il…", o:["cherche à donner du sens","s'appuie sur la raison","refuse toute croyance","explique des phénomènes"], a:0, e:"Les deux reposent sur la croyance. Le religieux donne du sens, le magico explique un phénomène."},
+  {t:"principes", q:"Choisir l'interprétation la plus favorable de la position de l'autre correspond au principe…", o:["de charité","de faillibilité","de l'accord des esprits","du respect des règles de l'échange"], a:0, e:"Charité : bénéfice du doute, sans concessions invalides."},
+  {t:"principes", q:"« La position rationnelle révélée ne peut pas être imposée à l'extérieur de la communauté de recherche. » C'est le principe…", o:["de l'accord des esprits","de charité","de faillibilité","de bonne foi"], a:0, e:"Accord des esprits : reprendre la discussion avec d'autres pour éviter le dogmatisme."},
+  {t:"principes", q:"Accepter de remettre en question ses opinions face à une réfutation rationnelle, c'est le principe…", o:["de faillibilité","de charité","de l'accord des esprits","du respect des règles"], a:0, e:"Faillibilité : viser la vérité, pas la confirmation de nos opinions."},
+  {t:"principes", q:"La logique formelle porte sur…", o:["le symbolisme","l'argumentation","la persuasion","les sophismes"], a:0, e:"Formelle = symbolisme ; informelle = argumentation."},
+  {t:"jugements", q:"Laquelle de ces phrases n'est PAS une proposition?", o:["Ferme la porte.","Il pleut dehors.","Tu devrais dire la vérité.","Je préfère le café au thé."], a:0, e:"Les phrases impératives et interrogatives sont exclues des propositions."},
+  {t:"jugements", q:"« Certains arbres sont verts » est une proposition…", o:["particulière","singulière","universelle","indéfinie"], a:0, e:"Cet = singulière · Certains = particulière · Tous = universelle · L' = indéfinie."},
+  {t:"jugements", q:"« L'arbre est vert » est une proposition…", o:["indéfinie","singulière","particulière","universelle"], a:0, e:"Article défini sans quantificateur = indéfinie."},
+  {t:"jugements", q:"Le jugement de valeur est aussi appelé…", o:["proposition d'appréciation","proposition d'obligation","proposition empirique","jugement de goût"], a:0, e:"Fait = empirique · Préférence = goût · Valeur = appréciation · Prescription = obligation."},
+  {t:"jugements", q:"Quels critères utilise-t-on pour évaluer un jugement de valeur?", o:["La cohérence et la pertinence","Les goûts individuels","Seulement vrai ou faux","La popularité de l'opinion"], a:0, e:"Partiellement subjectif : cohérence et pertinence, plus la véracité des faits qui le sous-tendent."},
+  {t:"jugements", q:"Quel jugement n'a aucune utilité en argumentation?", o:["De préférence","De valeur","De prescription","De fait"], a:0, e:"Purement subjectif, il n'a pas sa place dans un débat rationnel."},
+  {t:"jugements", q:"Le jugement de prescription repose sur…", o:["des jugements de fait ou de valeur","des jugements de préférence seulement","des intuitions personnelles","des phrases interrogatives"], a:0, e:"On l'évalue par la véracité de ces jugements, puis la pertinence et la suffisance des arguments."},
+  {t:"deduction", q:"Un raisonnement qui va du particulier au général est…", o:["inductif","déductif","formel","sophistique"], a:0, e:"Déductif : général vers particulier. Inductif : particulier vers général."},
+  {t:"deduction", q:"Dans un raisonnement déductif bien formé dont les prémisses sont vraies, la conclusion est…", o:["nécessairement vraie","probable","possible","indéterminée"], a:0, e:"La conclusion est contenue logiquement dans les prémisses."},
+  {t:"raisonnement", q:"« Certains chats sont des animaux. Félix est un animal. Donc Félix est un chat. »", o:["La conclusion ne découle pas nécessairement des prémisses","Le raisonnement est valide","C'est un raisonnement inductif fort","Les prémisses sont fausses"], a:0, e:"Être un animal ne fait pas de Félix un chat."},
+  {t:"deduction", q:"Quel argument inductif est le plus fort?", o:["Une étude sur 15 000 étudiants : 82 % utilisent l'IA","50 étudiants rencontrés, 45 étaient gentils","2 étudiants rencontrés étaient gentils","Mon ami utilise l'IA, donc tout le monde l'utilise"], a:0, e:"Le plus grand échantillon et une conclusion prudente (« la majorité »)."},
+  {t:"evaluation", q:"« Le dauphin est un mammifère… Donc la Lune tourne autour de la Terre. » Quel critère échoue?", o:["La pertinence","La suffisance","L'acceptabilité","Aucun"], a:0, e:"Les prémisses sont vraies, mais sans lien avec la conclusion."},
+  {t:"evaluation", q:"« Lorsqu'il pleut, la chaussée est mouillée. La chaussée est mouillée, donc il pleut. » Quel critère échoue?", o:["La suffisance","La pertinence","L'acceptabilité","Aucun"], a:0, e:"Le lien est pertinent, mais pas assez fort : la chaussée peut être mouillée pour d'autres raisons."},
+  {t:"evaluation", q:"Pour évaluer l'acceptabilité d'une prescription, on vérifie notamment…", o:["la faisabilité, le lien avec l'objectif et les conséquences","seulement les goûts de l'auteur","si la majorité est d'accord","la popularité de la mesure"], a:0, e:"Nature et effet de la prescription : faisabilité, lien avec l'objectif, conséquences."},
+  {t:"evaluation", q:"Seuls les raisonnements ___ ont une parfaite suffisance.", o:["déductifs","inductifs","causaux","analogiques"], a:0, e:"En induction, la suffisance indique un degré de probabilité."},
+  {t:"evaluation", q:"Qu'est-ce qui sert à évaluer l'acceptabilité d'un jugement de fait?", o:["Des sources crédibles et des données validées","La cohérence avec nos goûts","Le nombre de personnes qui y croient","La nouveauté de l'information"], a:0, e:"Observations fiables, preuves solides, données validées, sources crédibles, expertises pertinentes."},
+  {t:"sophismes", q:"« Ton argument sur l'environnement ne vaut rien, tu conduis un VUS. »", o:["Attaque contre la personne","Double faute","Caricature","Faux dilemme"], a:0, e:"On attaque l'individu au lieu de réfuter l'argument (pertinence)."},
+  {t:"sophismes", q:"« Je roulais trop vite, mais je ne faisais que suivre le trafic. »", o:["Double faute","Appel à la popularité","Lien causal douteux","Attaque contre la personne"], a:0, e:"Se justifier par les fautes des autres (pertinence)."},
+  {t:"sophismes", q:"« Tu veux réduire l'utilisation des téléphones? Donc tu veux interdire toute technologie. »", o:["Caricature","Pente fatale","Faux dilemme","Généralisation hâtive"], a:0, e:"On déforme la position de l'autre pour la réfuter plus facilement (pertinence)."},
+  {t:"sophismes", q:"« Soit on réduit les dépenses du gouvernement, soit l'économie va s'effondrer. »", o:["Faux dilemme","Pente fatale","Caricature","Lien causal douteux"], a:0, e:"On impose un choix entre deux options seulement (acceptabilité)."},
+  {t:"sophismes", q:"« S'il pleut, il y a des nuages. Il y a des nuages. Donc il pleut. »", o:["Affirmation du conséquent","Lien causal douteux","Généralisation hâtive","Faux dilemme"], a:0, e:"Une condition nécessaire est traitée comme suffisante (suffisance)."},
+  {t:"sophismes", q:"Sous quel critère le cours classe-t-il le lien causal douteux?", o:["Pertinence","Suffisance","Acceptabilité","Aucun critère"], a:0, e:"Piège classique : il est en pertinence, pas en suffisance."},
+  {t:"sophismes", q:"Sous quel critère le cours classe-t-il le faux dilemme?", o:["Acceptabilité","Pertinence","Suffisance","Aucun critère"], a:0, e:"Acceptabilité : AF = Autorité, Faux dilemme."},
+  {t:"sophismes", q:"« Ce camion Ford est excellent : The Rock a dit qu'il a le même. »", o:["Appel à l'autorité","Appel à la popularité","Appel à la modernité","Double faute"], a:0, e:"The Rock n'a pas de compétence sur les camions (acceptabilité)."},
+  {t:"sophismes", q:"« Ce téléphone est le meilleur parce qu'il vient de sortir. »", o:["Appel à la modernité","Appel à la popularité","Appel à l'autorité","Généralisation hâtive"], a:0, e:"Fonder la valeur sur la nouveauté (pertinence)."},
+  {t:"sophismes", q:"Un sophisme vise à…", o:["persuader plutôt que convaincre rationnellement","convaincre rationnellement","chercher la vérité en commun","appliquer le principe de charité"], a:0, e:"Une ruse avec l'apparence de la rationalité, utilisée consciemment pour tromper."},
+  {t:"sophismes", q:"« Si tu sautes un repas équilibré aujourd'hui, tu vas finir par mourir avant 40 ans. »", o:["Pente fatale","Lien causal douteux","Faux dilemme","Caricature"], a:0, e:"Une série de conséquences extrêmes, sans preuve (suffisance)."},
+  {t:"film", q:"Le MOD Squad réunit des lobbyistes du tabac, de l'alcool et…", o:["des armes à feu","de l'industrie pharmaceutique","de la malbouffe","des jeux de hasard"], a:0, e:"Merchants Of Death : tabac (Nick), alcool (Polly), armes à feu (Bobby Jay)."},
+  {t:"film", q:"Scène de la crème glacée : « J'ai prouvé que tu as tort, donc j'ai raison. » C'est…", o:["un faux dilemme","un appel à la popularité","une généralisation hâtive","une pente fatale"], a:0, e:"Comme s'il n'y avait que deux positions possibles."},
+  {t:"film", q:"Nick demande à une élève si sa mère est médecin pour rejeter ce qu'elle dit du tabac. C'est…", o:["une attaque contre la personne","un appel à la modernité","une affirmation du conséquent","un faux dilemme"], a:0, e:"Il discrédite la source au lieu de répondre à l'argument."},
+  {t:"film", q:"Comment Nick justifie-t-il son travail?", o:["Il doit payer l'hypothèque","Il croit que le tabac est bon pour la santé","Il veut devenir sénateur","Il est obligé par son fils"], a:0, e:"Il le présente comme un simple gagne-pain, en plus de son talent pour argumenter."},
+  {t:"platon", q:"Chez Platon (selon le cours), la doxa désigne…", o:["l'opinion","la connaissance véritable","la raison","la vertu"], a:0, e:"Doxa = opinion ; logos = connaissance véritable."},
+  {t:"platon", q:"Quel événement explique la méfiance de Platon envers la démocratie athénienne?", o:["La condamnation à mort de Socrate en 399 av. J.-C.","La fondation de l'Académie","La guerre de Troie","Sa naissance dans une famille aristocratique"], a:0, e:"Cette condamnation explique sa méfiance envers l'opinion populaire."},
+  {t:"formes", q:"Le monde intelligible est celui…", o:["des Formes ou Idées","des choses matérielles et changeantes","des ombres de la caverne","des opinions populaires"], a:0, e:"Le monde sensible : visible, matériel, changeant. L'intelligible : Formes stables."},
+  {t:"formes", q:"Pour Platon, la connaissance véritable porte sur ce qui est…", o:["stable, universel et intelligible","visible, matériel et changeant","agréable et utile","populaire et accepté"], a:0, e:"S-U-I : stable, universel, intelligible."},
+  {t:"caverne", q:"Selon le cours, l'erreur des prisonniers vient surtout…", o:["du fait qu'ils prennent l'apparence pour la réalité","seulement d'un manque d'information","de ce que tout ce qu'ils voient est faux","de leur mauvaise volonté"], a:0, e:"Pas seulement un manque d'information, et Platon ne dit pas que « tout est faux »."},
+  {t:"caverne", q:"Dans l'allégorie, le Soleil représente…", o:["l'Idée du Bien","l'Idée de Justice","la démocratie","Socrate"], a:0, e:"Comme le Soleil rend la vision possible, l'Idée du Bien rend la connaissance possible."},
+  {t:"caverne", q:"Pour Platon, éduquer, c'est…", o:["orienter l'esprit et transformer son regard","transmettre des informations à un élève passif","faire répéter ce qu'on a appris","imposer la vérité aux autres"], a:0, e:"Apprendre à juger autrement ; le philosophe cherche à comprendre et à justifier."},
+  {t:"caverne", q:"Le retour du prisonnier dans la caverne pose surtout la question…", o:["de la responsabilité envers les autres","du plaisir personnel","de la beauté des ombres","de la richesse matérielle"], a:0, e:"Partager le savoir, la résistance au philosophe, le rôle du savoir dans la vie politique."},
+  {t:"role", q:"Selon Platon, la philosophie oriente l'âme vers…", o:["le vrai, le juste et le bien","le plaisir et la richesse","la gloire et l'honneur","l'opinion majoritaire"], a:0, e:"Elle fait passer de l'opinion à la connaissance et a une dimension morale."},
+  {t:"ame", q:"L'ardeur est liée…", o:["au courage, à l'indignation et au désir de reconnaissance","à la nourriture et aux biens matériels","à la recherche de la vérité","à la sagesse"], a:0, e:"Raison = vérité ; ardeur = courage, indignation, reconnaissance ; désir = besoins et plaisirs."},
+  {t:"ame", q:"La tempérance correspond à…", o:["l'accord des parties, qui reconnaissent le rôle directeur de la raison","la vertu propre de la raison seulement","la suppression des désirs","la vertu propre de l'ardeur"], a:0, e:"Piège : ce n'est pas la vertu d'une seule partie."},
+  {t:"ame", q:"La justice dans l'âme, c'est…", o:["l'harmonie, chaque partie accomplissant sa fonction","le respect des lois de la cité","la domination de l'ardeur","la satisfaction de tous les désirs"], a:0, e:"La justice individuelle est un ordre intérieur."},
+  {t:"ame", q:"La vertu de la raison est…", o:["la sagesse","le courage","la tempérance","la justice"], a:0, e:"La sagesse détermine ce qui est bon pour l'ensemble de l'âme."},
+  {t:"politique", q:"Dans la cité idéale, les gardiens correspondent à…", o:["l'ardeur","la raison","le désir","la tempérance"], a:0, e:"Ils défendent la cité avec courage et discipline."},
+  {t:"politique", q:"Les producteurs regroupent…", o:["les artisans, les agriculteurs et les commerçants","les philosophes et les sages","les soldats et les gardiens","les juges et les législateurs"], a:0, e:"Ils correspondent à la partie désirante (besoins matériels)."},
+  {t:"politique", q:"Selon Platon, la cité est juste quand…", o:["chaque groupe accomplit sa fonction sans usurper celle des autres","tous participent également aux décisions","les producteurs gouvernent","les lois sont votées par la majorité"], a:0, e:"Même principe que dans l'âme : chacun sa fonction dans un ensemble ordonné."},
+  {t:"politique", q:"Quelle question soulève la conception platonicienne de la justice?", o:["La légitimité du pouvoir : qui reconnaît les vrais sages?","L'utilité de la monnaie","L'existence des dieux","La forme de la Terre"], a:0, e:"Et la tension entre harmonie collective et liberté individuelle."},
+  {t:"liberte", q:"Pour Platon, être libre, c'est…", o:["pouvoir examiner ses désirs et décider s'il est raisonnable de les satisfaire","satisfaire tous ses désirs","supprimer tous ses désirs","obéir aux lois sans réfléchir"], a:0, e:"La liberté est une maîtrise rationnelle."},
+  {t:"liberte", q:"La maîtrise de soi consiste à…", o:["donner une place appropriée aux désirs","supprimer tous les désirs","suivre ses impulsions","ignorer la raison"], a:0, e:"Une personne juste maîtrise et oriente ses désirs."}
+];
+
+const DEV = [
+  {s:"Caverne · réflexion en classe", q:"La vérité est-elle toujours préférable à une croyance rassurante? Expliquez pourquoi une personne pourrait résister à une connaissance qui remet en question sa vision du monde.",
+   these:"Pour Platon, oui : une croyance rassurante non examinée nous garde prisonniers des apparences. Mais il est normal de résister à la vérité, car elle dérange.",
+   concepts:["Les prisonniers prennent les ombres (apparences) pour la réalité.","Une conviction sincère n'est pas nécessairement justifiée.","Une opinion peut reposer sur l'habitude ou les croyances reçues.","L'éblouissement : la remise en question est inconfortable, il faut renoncer à nos certitudes.","Le retour : les prisonniers résistent au philosophe."],
+   exemples:["Une personne qui adhère à une théorie du complot rejette les preuves, car elles remettent en cause toute sa vision du monde.","Une personne qui refuse un diagnostic médical difficile : la vérité fait peur, mais elle permet de se soigner."],
+   nuance:"La vérité peut faire mal à court terme, mais elle permet de mieux orienter sa vie (dimension morale de la philosophie)."},
+  {s:"Caverne · réflexion en classe", q:"Le savoir entraîne-t-il une responsabilité envers les autres? Faites un lien avec le retour du prisonnier dans la caverne.",
+   these:"Oui : celui qui a compris quelque chose de vrai a la responsabilité de le partager, même s'il rencontre de la résistance.",
+   concepts:["Le prisonnier libéré pourrait rester dehors, mais il redescend.","Son retour pose la question de la responsabilité envers les autres.","Le philosophe rencontre de la résistance quand il remet en question les croyances établies.","Rôle du savoir dans la vie collective et politique : Platon veut que les philosophes gouvernent."],
+   exemples:["Les scientifiques du climat qui alertent la population malgré le déni.","Un lanceur d'alerte qui révèle un danger caché par une entreprise."],
+   nuance:"Avec le principe de l'accord des esprits : on partage le savoir par le dialogue, on ne l'impose pas."},
+  {s:"Âme tripartite · réflexion en classe", q:"Peut-on être une personne vertueuse si l'on sait ce qui est bien, mais que l'on agit régulièrement contre ce jugement?",
+   these:"Non, selon Platon : la vertu n'est pas seulement savoir ou avoir une bonne intention, c'est un équilibre durable où la raison dirige vraiment la conduite.",
+   concepts:["Trois parties : raison, ardeur, désir.","Sagesse (discerner le bien), courage (maintenir la décision), tempérance (accord des parties).","La vertu suppose une organisation harmonieuse de l'âme.","La vertu exige plus qu'une bonne intention : un équilibre durable entre réflexion, émotions et désirs.","Comprendre ce qui est bon ne suffit pas : il faut agir en conséquence."],
+   exemples:["Un fumeur qui sait que fumer tue mais continue : ses désirs dominent sa raison.","Un étudiant qui sait qu'il doit étudier mais passe la soirée sur les réseaux sociaux."],
+   nuance:"Une faiblesse occasionnelle n'efface pas tout, mais agir « régulièrement » contre son jugement montre un désordre intérieur."},
+  {s:"Philosophie politique · réflexion en classe", q:"Une société est-elle plus juste lorsque chacun exerce la fonction pour laquelle il est le mieux qualifié, ou lorsque tous disposent d'une participation égale aux décisions politiques?",
+   these:"Platon choisirait la compétence : la cité est juste quand chaque groupe accomplit sa fonction et que les philosophes gouvernent. Cette position est toutefois contestable.",
+   concepts:["Analogie âme et cité : philosophes-rois (raison), gardiens (ardeur), producteurs (désir).","Justice = chaque groupe accomplit sa fonction sans usurper celle des autres.","Méfiance envers la démocratie athénienne (mort de Socrate).","Critique : légitimité du pouvoir. Qui détermine les aptitudes? Qui reconnaît les vrais sages?","Tension entre harmonie collective et liberté individuelle."],
+   exemples:["On confie la chirurgie à des médecins, pas à un vote : la compétence compte.","La démocratie protège contre l'abus de pouvoir d'une élite qui se croirait sage."],
+   nuance:"Une position équilibrée : la compétence des experts pour conseiller, la participation égale pour décider."},
+  {s:"Liberté · réflexion écrite", q:"Selon Platon, une personne qui suit toujours ses désirs peut-elle être libre? Pourquoi?",
+   these:"Non : elle est dépendante de ses impulsions, et non maîtresse de ses décisions.",
+   concepts:["La liberté ne consiste pas à satisfaire tous ses désirs.","Dominée par un désir, la personne néglige ce qu'elle juge bon et est conduite par ce qu'il y a de moins rationnel en elle.","Être libre = examiner ses désirs et décider s'il est raisonnable de les satisfaire.","Maîtrise de soi : ne pas supprimer les désirs, leur donner une place appropriée.","Elle contribue à l'harmonie de l'âme et à la justice dans la personne."],
+   exemples:["L'exemple du cours : l'étudiant qui veut réussir son examen mais regarde sans cesse son téléphone.","Une dépendance (jeu, alcool) : la personne « choisit » mais n'agit plus selon ses propres objectifs."],
+   nuance:"Les désirs ne sont pas mauvais : le problème, c'est quand ils décident seuls."},
+  {s:"Thank You for Smoking", q:"Quelles sont les limites de l'argument « il faut penser pour soi-même »? Donnez 2 exemples contemporains.",
+   these:"Penser par soi-même est une bonne chose, mais le slogan peut servir à rejeter l'expertise et les preuves au profit de l'opinion (doxa).",
+   concepts:["Nick l'utilise pour discréditer les sources (attaque contre la personne) et manipuler.","Questions pour rester critique : la théorie implique-t-elle de renier toutes les sources officielles? Rejette-t-elle toute remise en question?","Penser par soi-même exige l'argumentation rationnelle et la faillibilité, pas seulement le rejet des autres."],
+   exemples:["Le mouvement antivaccin et le slogan « fais tes propres recherches ».","Le climatoscepticisme ou les théories de la Terre plate."],
+   nuance:"Penser par soi-même, c'est examiner les raisons (Platon), pas croire ce qui nous arrange."},
+  {s:"Thank You for Smoking", q:"« Si tu argumentes correctement, tu n'as jamais tort. » Qu'est-ce qui manque à cette compréhension de l'argumentation? Quelles en sont les conséquences?",
+   these:"Il manque la visée de la vérité : Nick confond persuader et convaincre rationnellement.",
+   concepts:["Respect des règles de l'échange : recherche de la vérité, bonne foi, ne pas faire appel à la persuasion.","Faillibilité : accepter d'avoir tort face à une réfutation rationnelle.","Sophisme : apparence de rationalité pour persuader et tromper.","Platon : doxa vs logos, le philosophe cherche à justifier ce qui est vrai."],
+   exemples:["La scène de la crème glacée : « Je ne vise pas toi, je vise eux. »","La désinformation politique ou publicitaire qui gagne des débats sans dire vrai."],
+   nuance:"Conséquences : relativisme (tout se vaut), manipulation du public, perte de confiance dans le débat."},
+  {s:"Thank You for Smoking", q:"Quelles autres industries fonctionnent comme le MOD Squad? Quelles valeurs utilisent-elles pour justifier leur travail?",
+   these:"Plusieurs industries dont les produits causent du tort se défendent avec les mêmes valeurs que Nick.",
+   concepts:["Valeurs invoquées : liberté de choix, responsabilité individuelle, emplois et économie, droits, plaisir.","Procédés : sophismes, études financées par l'industrie (appel à l'autorité), « spin »."],
+   exemples:["Le vapotage, l'alcool, les armes à feu, les paris sportifs en ligne.","Les réseaux sociaux (dépendance des jeunes), la malbouffe et le sucre, le pétrole."],
+   nuance:"Ces valeurs sont réelles, mais elles servent ici à détourner le débat des faits (pertinence)."},
+  {s:"Thank You for Smoking", q:"La fin justifie-t-elle les moyens? Donnez des exemples des deux côtés de l'argument dans le film.",
+   these:"Dans le film, les deux camps trahissent les principes de l'argumentation pour arriver à leurs fins.",
+   concepts:["Tabac : mensonges, mallette d'argent pour acheter le silence de Lorne, contrat avec Hollywood.","Anti-tabac : le sénateur veut effacer les cigarettes des vieux films ; des extrémistes enlèvent Nick et le couvrent de timbres de nicotine.","Médias : Heather couche avec Nick pour un scoop.","Principes violés : bonne foi, ne pas tromper volontairement."],
+   exemples:["Une cause juste (la santé publique) ne justifie pas l'enlèvement ou la censure.","Le profit ne justifie pas de cacher les dangers d'un produit."],
+   nuance:"Une bonne cause défendue avec de mauvais moyens perd sa crédibilité."},
+  {s:"Synthèse possible (pas dans le cours)", q:"En quoi Nick Naylor illustre-t-il ce que Platon reproche aux opinions?",
+   these:"Nick fabrique de la doxa : il manipule les apparences au lieu de chercher le vrai, comme ceux qui projettent les ombres dans la caverne.",
+   concepts:["Doxa (opinion) vs logos (connaissance véritable).","Les prisonniers prennent l'apparence pour la réalité.","Une conviction sincère n'est pas nécessairement justifiée.","La philosophie oriente l'âme vers le vrai, le juste et le bien."],
+   exemples:["Les films où les vedettes fument : des ombres qui rendent la cigarette désirable.","Le talk-show où Nick retourne le public avec des sophismes."],
+   nuance:"Le public n'est pas condamné : l'éducation (la sortie de la caverne) apprend à examiner les raisons."}
+];
+
+/* ---------- Utilitaires ---------- */
+const $ = (id) => document.getElementById(id);
+function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function load(key, fallback) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; } }
+function save(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+function fillThemeSelect(sel) {
+  sel.innerHTML = "";
+  const all = document.createElement("option"); all.value = ""; all.textContent = "Tous les thèmes"; sel.appendChild(all);
+  for (const k in THEMES) { const o = document.createElement("option"); o.value = k; o.textContent = THEMES[k]; sel.appendChild(o); }
+}
+
+/* ---------- Onglets ---------- */
+const VIEWS = ["fiches", "cartes", "quiz", "developpement"];
+function showView(v) {
+  if (!VIEWS.includes(v)) v = "fiches";
+  VIEWS.forEach((name) => {
+    $("view-" + name).hidden = name !== v;
+    $("tab-" + name).setAttribute("aria-selected", String(name === v));
+  });
+  try { history.replaceState(null, "", "#" + v); } catch (e) {}
+  save("philo2-vue", v);
+}
+document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => { showView(b.dataset.view); window.scrollTo({ top: 0 }); }));
+
+/* ---------- Fiches ---------- */
+const chips = $("chips");
+document.querySelectorAll("section.fiche").forEach((s) => {
+  const b = document.createElement("button");
+  b.className = "chip"; b.type = "button"; b.textContent = s.dataset.chip;
+  b.addEventListener("click", () => s.scrollIntoView({ behavior: "smooth", block: "start" }));
+  chips.appendChild(b);
+});
+const btnCache = $("btn-cache");
+function setCache(on) {
+  document.body.classList.toggle("cache", on);
+  btnCache.setAttribute("aria-pressed", String(on));
+  btnCache.textContent = on ? "Montrer les mots surlignés" : "Cacher les mots surlignés";
+  if (!on) document.querySelectorAll("mark.vu").forEach((m) => m.classList.remove("vu"));
+}
+btnCache.addEventListener("click", () => setCache(!document.body.classList.contains("cache")));
+document.addEventListener("click", (e) => {
+  const m = e.target.closest("mark");
+  if (m && document.body.classList.contains("cache")) m.classList.toggle("vu");
+});
+
+/* ---------- Cartes-éclair ---------- */
+let progress = load("philo2-cartes", { known: [], review: [] });
+let deck = [], pos = 0, shuffled = false;
+const selCards = $("cards-theme"); fillThemeSelect(selCards);
+
+function buildDeck() {
+  const theme = selCards.value, onlyReview = $("cards-review").checked;
+  let ids = CARDS.map((_, i) => i).filter((i) => (!theme || CARDS[i][0] === theme) && (!onlyReview || progress.review.includes(i)));
+  deck = shuffled ? shuffle(ids) : ids; pos = 0; renderCard();
+}
+function renderStats() {
+  const theme = selCards.value;
+  const ids = CARDS.map((_, i) => i).filter((i) => !theme || CARDS[i][0] === theme);
+  const k = ids.filter((i) => progress.known.includes(i)).length;
+  const r = ids.filter((i) => progress.review.includes(i)).length;
+  $("cards-stats").innerHTML =
+    '<span><b>' + ids.length + '</b> cartes</span>' +
+    '<span><i class="dot" style="background:var(--good)"></i><b>' + k + '</b> sues</span>' +
+    '<span><i class="dot" style="background:var(--bad)"></i><b>' + r + '</b> à revoir</span>' +
+    '<span><b>' + (ids.length - k - r) + '</b> pas encore vues</span>';
+}
+function renderCard() {
+  renderStats();
+  const empty = deck.length === 0;
+  ["flash-reveal", "flash-prev", "flash-next"].forEach((id) => $(id).disabled = empty);
+  $("flash-a").hidden = true; $("flash-know").hidden = true; $("flash-again").hidden = true; $("flash-reveal").hidden = false;
+  if (empty) {
+    $("flash-theme").textContent = ""; $("flash-pos").textContent = "";
+    $("flash-q").textContent = $("cards-review").checked ? "Aucune carte « À revoir » pour ce thème. Bravo!" : "Aucune carte.";
+    return;
+  }
+  const c = CARDS[deck[pos]];
+  $("flash-theme").textContent = THEMES[c[0]];
+  $("flash-pos").textContent = (pos + 1) + " / " + deck.length;
+  $("flash-q").textContent = c[1];
+  $("flash-a").textContent = c[2];
+}
+function reveal() {
+  if (!deck.length) return;
+  $("flash-a").hidden = false; $("flash-reveal").hidden = true;
+  $("flash-know").hidden = false; $("flash-again").hidden = false;
+}
+function mark(knew) {
+  if (!deck.length) return;
+  const i = deck[pos];
+  progress.known = progress.known.filter((x) => x !== i);
+  progress.review = progress.review.filter((x) => x !== i);
+  (knew ? progress.known : progress.review).push(i);
+  save("philo2-cartes", progress);
+  if ($("cards-review").checked && knew) { deck.splice(pos, 1); if (pos >= deck.length) pos = 0; renderCard(); }
+  else next();
+}
+function next() { if (!deck.length) return; pos = (pos + 1) % deck.length; renderCard(); }
+function prev() { if (!deck.length) return; pos = (pos - 1 + deck.length) % deck.length; renderCard(); }
+
+$("flash-reveal").addEventListener("click", reveal);
+$("flash").addEventListener("click", reveal);
+$("flash-know").addEventListener("click", () => mark(true));
+$("flash-again").addEventListener("click", () => mark(false));
+$("flash-next").addEventListener("click", next);
+$("flash-prev").addEventListener("click", prev);
+$("cards-shuffle").addEventListener("click", () => { shuffled = true; buildDeck(); });
+selCards.addEventListener("change", buildDeck);
+$("cards-review").addEventListener("change", buildDeck);
+const btnReset = $("cards-reset");
+btnReset.addEventListener("click", () => {
+  if (btnReset.dataset.armed !== "1") {
+    btnReset.dataset.armed = "1"; btnReset.textContent = "Confirmer la remise à zéro";
+    setTimeout(() => { btnReset.dataset.armed = ""; btnReset.textContent = "Remettre à zéro"; }, 4000);
+    return;
+  }
+  btnReset.dataset.armed = ""; btnReset.textContent = "Remettre à zéro";
+  progress = { known: [], review: [] }; save("philo2-cartes", progress); buildDeck();
+});
+document.addEventListener("keydown", (e) => {
+  if ($("view-cartes").hidden) return;
+  const tag = (e.target.tagName || "").toLowerCase();
+  if (tag === "select" || tag === "input") return;
+  if (e.key === " " || e.key === "Enter") { if (tag !== "button") { e.preventDefault(); reveal(); } }
+  else if (e.key === "1" && !$("flash-know").hidden) mark(true);
+  else if (e.key === "2" && !$("flash-again").hidden) mark(false);
+  else if (e.key === "ArrowRight") next();
+  else if (e.key === "ArrowLeft") prev();
+});
+
+/* ---------- Quiz ---------- */
+const selQuiz = $("quiz-theme"); fillThemeSelect(selQuiz);
+let qList = [], qIdx = 0, qScore = 0, qMissed = [];
+
+function startQuiz() {
+  const theme = selQuiz.value;
+  qList = shuffle(QUIZ.filter((q) => !theme || q.t === theme));
+  qIdx = 0; qScore = 0; qMissed = []; renderQuiz();
+}
+function quizStats() {
+  $("quiz-stats").innerHTML = '<span>Question <b>' + Math.min(qIdx + 1, qList.length) + '</b> / ' + qList.length + '</span><span>Score : <b>' + qScore + '</b></span>';
+  $("quiz-bar").style.width = (qList.length ? (qIdx / qList.length) * 100 : 0) + "%";
+}
+function renderQuiz() {
+  quizStats();
+  const box = $("quiz-box"); box.innerHTML = "";
+  if (!qList.length) { box.innerHTML = "<p>Aucune question pour ce thème.</p>"; return; }
+  if (qIdx >= qList.length) {
+    const pct = Math.round((qScore / qList.length) * 100);
+    $("quiz-bar").style.width = "100%";
+    let html = '<span class="label">Résultat</span><p class="q">' + qScore + ' / ' + qList.length + ' (' + pct + ' %)</p>';
+    if (qMissed.length) {
+      html += '<p>À retravailler :</p><div class="missed">' + qMissed.map((m) => '<div><b>' + m.q + '</b><br>Bonne réponse : ' + m.o[m.a] + '</div>').join("") + '</div>';
+    } else { html += '<p>Sans faute. Essaie un autre thème ou les cartes-éclair.</p>'; }
+    html += '<div class="row"><button class="btn primary" id="quiz-again">Recommencer</button></div>';
+    box.innerHTML = html; $("quiz-again").addEventListener("click", startQuiz); return;
+  }
+  const item = qList[qIdx];
+  const lab = document.createElement("span"); lab.className = "label"; lab.textContent = THEMES[item.t]; box.appendChild(lab);
+  const q = document.createElement("p"); q.className = "q"; q.textContent = item.q; box.appendChild(q);
+  const opts = document.createElement("div"); opts.className = "opts"; box.appendChild(opts);
+  const fb = document.createElement("div"); fb.hidden = true; box.appendChild(fb);
+  const nextBtn = document.createElement("button"); nextBtn.className = "btn primary"; nextBtn.hidden = true;
+  nextBtn.textContent = qIdx + 1 < qList.length ? "Question suivante" : "Voir le résultat";
+  nextBtn.addEventListener("click", () => { qIdx++; renderQuiz(); });
+  const order = shuffle(item.o.map((_, i) => i));
+  const buttons = [];
+  order.forEach((oi) => {
+    const b = document.createElement("button"); b.className = "opt"; b.type = "button"; b.textContent = item.o[oi];
+    b.addEventListener("click", () => {
+      buttons.forEach((x) => { x.btn.disabled = true; if (x.oi === item.a) x.btn.classList.add("ok"); });
+      const right = oi === item.a;
+      if (right) qScore++; else { b.classList.add("ko"); qMissed.push(item); }
+      fb.className = "feedback " + (right ? "ok" : "ko");
+      fb.innerHTML = "<b>" + (right ? "Bonne réponse." : "Mauvaise réponse.") + "</b> " + item.e;
+      fb.hidden = false; nextBtn.hidden = false; quizStats(); nextBtn.focus();
+    });
+    buttons.push({ btn: b, oi }); opts.appendChild(b);
+  });
+  box.appendChild(nextBtn);
+}
+selQuiz.addEventListener("change", startQuiz);
+$("quiz-restart").addEventListener("click", startQuiz);
+
+/* ---------- Développement ---------- */
+const dev = $("dev");
+DEV.forEach((d) => {
+  const el = document.createElement("details");
+  const li = (arr) => "<ul>" + arr.map((x) => "<li>" + x + "</li>").join("") + "</ul>";
+  el.innerHTML =
+    '<summary><span class="label">' + d.s + '</span><span class="t">' + d.q + '</span></summary>' +
+    '<div class="in">' +
+    '<div class="blk"><h4>Thèse</h4><p>' + d.these + '</p></div>' +
+    '<div class="blk"><h4>Concepts du cours à placer</h4>' + li(d.concepts) + '</div>' +
+    '<div class="blk"><h4>Deux exemples</h4>' + li(d.exemples) + '</div>' +
+    '<div class="blk"><h4>Nuance et conclusion</h4><p>' + d.nuance + '</p></div>' +
+    '</div>';
+  dev.appendChild(el);
+});
+
+/* ---------- Démarrage ---------- */
+buildDeck();
+startQuiz();
+const fromHash = (location.hash || "").replace("#", "");
+showView(VIEWS.includes(fromHash) ? fromHash : load("philo2-vue", "fiches"));
+</script>
+
+</body>
+</html>
