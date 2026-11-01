@@ -1,0 +1,418 @@
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <h1>Agora 340</h1>
+      <span class="sub">Philosophie et rationalité · Test de compréhension 2</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" data-view="express" aria-selected="true">Express 25 min</button>
+      <button class="tab" role="tab" data-view="fiches" aria-selected="false">Fiches</button>
+      <button class="tab" role="tab" data-view="quiz" aria-selected="false">Quiz <span class="n" id="n-quiz"></span></button>
+      <button class="tab" role="tab" data-view="exam" aria-selected="false">Examen blanc</button>
+      <button class="tab" role="tab" data-view="cards" aria-selected="false">Cartes éclair</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================================================ FICHES -->
+<section class="view" id="view-fiches">
+<div class="wrap">
+<aside class="toc" id="toc" aria-label="Sommaire des fiches">
+  <div class="toc-progress"><span id="toc-pct">0 fiche maîtrisée sur 16</span><div class="bar"><i id="toc-bar"></i></div></div>
+  <div class="part">Départ</div>
+  <a href="#s0"><span class="num">0</span>Le guide de révision</a>
+  <div class="part">Partie 1 · L'argumentation rationnelle</div>
+  <a href="#s1"><span class="num">1</span>Les types de discours</a>
+  <a href="#s2"><span class="num">2</span>Les principes de l'argumentation</a>
+  <a href="#s3"><span class="num">3</span>Les types de jugements</a>
+  <a href="#s4"><span class="num">4</span>Force et véracité</a>
+  <a href="#s5"><span class="num">5</span>La structure du raisonnement</a>
+  <a href="#s6"><span class="num">6</span>Déductif et inductif</a>
+  <a href="#s7"><span class="num">7</span>Acceptabilité, pertinence, suffisance</a>
+  <a href="#s8"><span class="num">8</span>Les sophismes</a>
+  <div class="part">Partie 2 · Le film</div>
+  <a href="#s9"><span class="num">9</span>Thank You for Smoking</a>
+  <div class="part">Partie 3 · Platon</div>
+  <a href="#s10"><span class="num">10</span>Platon : repères</a>
+  <a href="#s11"><span class="num">11</span>La théorie des Formes</a>
+  <a href="#s12"><span class="num">12</span>L'allégorie de la caverne</a>
+  <a href="#s13"><span class="num">13</span>Le rôle de la philosophie</a>
+  <a href="#s14"><span class="num">14</span>L'âme tripartite</a>
+  <a href="#s15"><span class="num">15</span>La philosophie politique</a>
+  <a href="#s16"><span class="num">16</span>La liberté et la maîtrise de soi</a>
+</aside>
+<button class="btn primary toc-btn" id="toc-btn" type="button">Sommaire</button>
+
+<div class="article" id="article">
+
+<!-- ---------------------------------------------------------------- S0 -->
+<section class="fiche" id="s0" data-title="Le guide de révision">
+  <div class="eyebrow">Départ</div>
+  <h2>Le guide de révision, en une page</h2>
+  <p class="lead">Tout ce qui suit est tiré des diapositives de Yanie Pierre-Jérôme (L'argumentation rationnelle, cours 10, 12, 15, 16, 17, Platon, Thank You for Smoking) et du guide de révision officiel. Les encadrés « Truc mémo » et « Corrigé proposé » sont des ajouts pour t'aider : ils ne viennent pas des diapos.</p>
+  <div class="modal">
+    <div><b>Durée</b>2 heures</div>
+    <div><b>Matériel permis</b>Ton dictionnaire personnel</div>
+    <div><b>Types de questions</b>Choix multiples, réponses courtes, développement</div>
+    <div><b>Matière</b>Tout ce qui a été vu depuis le Test 1</div>
+  </div>
+  <h3>Les 17 thèmes à étudier</h3>
+  <p>Coche un thème quand tu te sens prêt. La coche se retient sur cet appareil. Chaque thème mène à la fiche qui le couvre.</p>
+  <ul class="chk" id="guide-list">
+    <li><a href="#s1" data-s="s1"><span class="box"></span>Les types de discours</a></li>
+    <li><a href="#s2" data-s="s2"><span class="box"></span>Les principes de l'argumentation</a></li>
+    <li><a href="#s3" data-s="s3"><span class="box"></span>Les types de jugements (fait, préférence, valeur et prescription)</a></li>
+    <li><a href="#s4" data-s="s4"><span class="box"></span>Les critères de force et vérité</a></li>
+    <li><a href="#s6" data-s="s6"><span class="box"></span>Les raisonnements déductifs et inductifs</a></li>
+    <li><a href="#s5" data-s="s5"><span class="box"></span>La structure des raisonnements</a></li>
+    <li><a href="#s7" data-s="s7"><span class="box"></span>L'acceptabilité, la pertinence et la suffisance des prémisses</a></li>
+    <li><a href="#s7" data-s="s7"><span class="box"></span>L'évaluation des raisonnements</a></li>
+    <li><a href="#s8" data-s="s8"><span class="box"></span>Les sophismes</a></li>
+    <li><a href="#s9" data-s="s9"><span class="box"></span>Le film Thank You for Smoking</a></li>
+    <li><a href="#s11" data-s="s11"><span class="box"></span>La théorie des Formes</a></li>
+    <li><a href="#s12" data-s="s12"><span class="box"></span>L'allégorie de la caverne</a></li>
+    <li><a href="#s13" data-s="s13"><span class="box"></span>Le rôle de la philosophie</a></li>
+    <li><a href="#s14" data-s="s14"><span class="box"></span>La compréhension tripartite de l'âme</a></li>
+    <li><a href="#s15" data-s="s15"><span class="box"></span>La philosophie politique de Platon</a></li>
+    <li><a href="#s16" data-s="s16"><span class="box"></span>La liberté et la maîtrise de soi</a></li>
+    <li><a href="#s10" data-s="s10"><span class="box"></span>Platon : sa vie, la doxa et le logos (contexte de toutes les fiches de la partie 3)</a></li>
+  </ul>
+  <div class="piege">
+    <span class="blabel">Comment utiliser ces pages</span>
+    <p>Lis une fiche, puis clique « Quiz sur cette fiche » en bas pour vérifier tout de suite. Pour le par cœur, active le <strong>mode récitation</strong> dans le sommaire : les mots en gras deviennent des blocs gris, tu récites, puis tu touches un bloc pour vérifier. Les questions ratées se retiennent : le mode « Prioriser mes erreurs » du quiz te les ressert. La veille, fais l'examen blanc en 2 heures, sans les fiches.</p>
+  </div>
+</section>
+
+<!-- ---------------------------------------------------------------- S1 -->
+<section class="fiche" id="s1" data-title="Les types de discours">
+  <div class="eyebrow">Partie 1 · Fiche 1 · L'argumentation rationnelle</div>
+  <h2>Les quatre types de discours</h2>
+  <p class="lead">Deux questions suffisent pour classer un discours : s'appuie-t-il sur la <strong>croyance</strong> ou sur la <strong>raison</strong> ? Veut-il <strong>expliquer un phénomène</strong> ou <strong>donner du sens</strong> ?</p>
+  <div class="tbl-wrap"><table>
+    <tr><th></th><th>Expliquer un phénomène</th><th>Donner du sens</th></tr>
+    <tr><td><strong>Croyance</strong></td><td><strong>Magico-superstitieux</strong></td><td><strong>Religieux</strong></td></tr>
+    <tr><td><strong>Raison</strong></td><td><strong>Scientifique</strong></td><td><strong>Philosophique</strong></td></tr>
+  </table></div>
+
+  <h3>Le discours magico-superstitieux</h3>
+  <ul>
+    <li>Il a pour but d'<strong>expliquer un phénomène</strong> en se basant sur des <strong>entités magiques ou surnaturelles</strong>.</li>
+    <li>Il s'appuie sur la <strong>croyance et non la raison</strong>. L'objectif est d'<strong>apaiser les anxiétés venant de l'inconnu</strong>.</li>
+    <li>Il peut être <strong>erroné, divertissant ou manipulateur</strong>.</li>
+  </ul>
+
+  <h3>Le discours religieux</h3>
+  <ul>
+    <li>Il cherche à <strong>donner du sens</strong> et à répondre à des <strong>questions fondamentales</strong> (la mort, la souffrance, l'amour, etc.).</li>
+    <li>Il s'appuie sur la <strong>croyance</strong>, fait référence aux <strong>êtres surnaturels</strong> et peut être <strong>imprécis</strong> comme le discours magico-superstitieux.</li>
+    <li>Le réel peut <strong>dépasser ce que la raison peut saisir</strong> : c'est pourquoi il faut accepter une part de croyance.</li>
+    <li>Il donne une <strong>orientation à nos actions</strong> et sert de <strong>guide spirituel</strong>.</li>
+  </ul>
+
+  <h3>Le discours scientifique</h3>
+  <ul>
+    <li>Il cherche à <strong>expliquer des phénomènes</strong> en se basant sur la <strong>raison</strong>.</li>
+    <li>Il part d'une <strong>hypothèse</strong> et se base sur des <strong>expériences</strong> et l'<strong>analyse des données recueillies</strong> pour tirer des <strong>conclusions vérifiables</strong>.</li>
+    <li>La <strong>précision et l'exactitude</strong> sont sa marque : c'est pourquoi la <strong>vérification des sources</strong> est aussi importante.</li>
+    <li>Il ne cherche pas à apaiser l'anxiété, mais contient une intention de <strong>prévision ou de contrôle</strong>.</li>
+    <li>Il faut accepter ses conclusions <strong>même si elles vont à l'encontre de notre intuition ou de notre volonté</strong>.</li>
+    <li>Certains discours magico-superstitieux <strong>utilisent la méthode scientifique</strong> pour se faire passer pour un discours scientifique : il faut être prudent. Les <strong>théories du complot</strong> en sont un bon exemple.</li>
+  </ul>
+  <h3>Comment rester critique : les 5 questions</h3>
+  <ol class="steps">
+    <li>Comment se construit <strong>l'argumentaire</strong> ?</li>
+    <li>Les personnes citées sont-elles des <strong>autorités dans le domaine</strong> et font-elles <strong>consensus</strong> ?</li>
+    <li>La théorie implique-t-elle de <strong>renier toutes les sources officielles</strong> ?</li>
+    <li>La théorie joue-t-elle sur nos <strong>sentiments</strong> ?</li>
+    <li>La théorie rejette-t-elle <strong>toute remise en question</strong> ?</li>
+  </ol>
+
+  <h3>Le discours philosophique</h3>
+  <ul>
+    <li>Il est basé sur la <strong>raison</strong> et répond à des <strong>questions fondamentales</strong>.</li>
+    <li>Sa rationalité est fondée sur <strong>l'argumentation et l'évaluation de celle-ci</strong>.</li>
+    <li>Le <strong>doute</strong> face à nos opinions et connaissances est le <strong>premier pas vers la recherche rationnelle de la vérité</strong>.</li>
+    <li>La philosophie cherche à <strong>donner du sens</strong>, contrairement à la science qui veut <strong>simplement expliquer</strong> des phénomènes.</li>
+  </ul>
+  <div class="retenir">
+    <span class="blabel">Truc mémo</span>
+    <p>Magie et Science <strong>expliquent</strong>. Religion et Philo <strong>donnent du sens</strong>. Magie et Religion <strong>croient</strong>. Science et Philo <strong>raisonnent</strong>. Retrouve la case du tableau et tu as la réponse.</p>
+  </div>
+  <div class="piege">
+    <span class="blabel">Piège d'examen</span>
+    <p>Religieux et magico-superstitieux partagent la croyance, le surnaturel et l'imprécision. Seul le <strong>but</strong> les sépare : donner du sens (religieux) ou expliquer un phénomène (magico).</p>
+  </div>
+  <div class="note">
+    <span class="blabel">Corrigé de l'exercice du cours</span>
+    <p>a) religieux · b) scientifique · c) philosophique · d) magico-superstitieux.</p>
+  </div>
+  <div class="sec-actions"></div>
+</section>
+
+<!-- ---------------------------------------------------------------- S2 -->
+<section class="fiche" id="s2" data-title="Les principes de l'argumentation">
+  <div class="eyebrow">Partie 1 · Fiche 2 · L'argumentation rationnelle</div>
+  <h2>La logique et les quatre principes de l'argumentation</h2>
+  <h3>L'argumentation et la logique formelle</h3>
+  <ul>
+    <li>Les êtres humains ont une <strong>aptitude innée</strong> pour le raisonnement, mais les <strong>règles et normes</strong> qui régissent le raisonnement <strong>doivent être apprises</strong>.</li>
+  </ul>
+  <div class="def">
+    <span class="blabel">Définition</span>
+    <span class="term">La logique</span>
+    <p>La discipline philosophique qui se soucie de la <strong>rectitude du raisonnement</strong>.</p>
+  </div>
+  <p>On distingue la logique <strong>formelle</strong> (le <strong>symbolisme</strong>) de la logique <strong>informelle</strong> (l'<strong>argumentation</strong>).</p>
+
+  <h3>Les quatre principes</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Principe</th><th>Ce qu'il exige</th></tr>
+    <tr><td><strong>1. Le respect des règles de l'échange</strong></td><td>a) La <strong>recherche communautaire</strong> de la connaissance et la vérité. b) La <strong>bonne foi</strong> dans les échanges. c) Ne pas <strong>tromper volontairement</strong>, <strong>dévier la conversation</strong> ou faire appel à la <strong>persuasion</strong>.</td></tr>
+    <tr><td><strong>2. La charité envers autrui</strong></td><td>a) S'il y a place à l'interprétation, opter pour celle qui est <strong>la plus favorable</strong>. b) Donner le <strong>bénéfice du doute</strong> et être généreux sur l'interprétation <strong>sans faire des concessions invalides</strong>.</td></tr>
+    <tr><td><strong>3. La faillibilité</strong></td><td>a) Accepter de <strong>remettre en question nos opinions</strong> face à une <strong>réfutation rationnelle</strong>. b) Avoir pour visée <strong>la vérité</strong> et non la <strong>confirmation de nos opinions personnelles</strong>. c) Toute opinion doit être <strong>argumentée de manière rationnelle</strong>.</td></tr>
+    <tr><td><strong>4. L'accord des esprits</strong></td><td>a) La position rationnelle révélée <strong>ne peut pas être imposée</strong> aux personnes <strong>à l'extérieur de la communauté de recherche</strong>. b) La discussion doit être reprise <strong>avec d'autres interlocuteurs</strong> pour éviter un <strong>dogmatisme</strong>.</td></tr>
+  </table></div>
+  <div class="retenir">
+    <span class="blabel">Truc mémo</span>
+    <p><strong>R</strong>aisonner <strong>C</strong>almement <strong>F</strong>ait l'<strong>A</strong>ccord : Respect des règles, Charité, Faillibilité, Accord des esprits.</p>
+  </div>
+  <div class="piege">
+    <span class="blabel">Piège d'examen</span>
+    <p>« Faire appel à la persuasion » est interdit par le <strong>respect des règles de l'échange</strong>, pas par la charité. Et c'est l'<strong>accord des esprits</strong> qui protège contre le <strong>dogmatisme</strong>.</p>
+  </div>
+  <div class="sec-actions"></div>
+</section>
+
+<!-- ---------------------------------------------------------------- S3 -->
+<section class="fiche" id="s3" data-title="Les types de jugements">
+  <div class="eyebrow">Partie 1 · Fiche 3 · L'argumentation rationnelle et cours 10</div>
+  <h2>La proposition et les quatre types de jugements</h2>
+  <div class="def">
+    <span class="blabel">Définition</span>
+    <span class="term">La proposition</span>
+    <p>Aussi appelée <strong>assertion</strong> ou <strong>jugement</strong>. C'est le <strong>matériau de base de l'argumentation</strong>, agencé pour construire des raisonnements : une <strong>assertion déclarative</strong> faite par une personne.</p>
+  </div>
+  <ul>
+    <li>Une phrase peut contenir <strong>plusieurs propositions</strong>.</li>
+    <li>On peut y répondre par <strong>« cela est vrai » ou « cela est faux »</strong>.</li>
+    <li>Elle <strong>exclut les phrases impératives et interrogatives</strong>.</li>
+    <li>La <strong>clarté</strong> des propositions facilite la progression de la discussion.</li>
+  </ul>
+
+  <h3>Les quatre types de jugements</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Jugement</th><th>Aussi appelé</th><th>Définition</th><th>Exemple du cours</th></tr>
+    <tr><td><strong>De fait</strong></td><td><strong>Proposition empirique</strong></td><td>Porte sur l'<strong>existence ou l'inexistence dans la réalité sensible</strong>. Vise une description <strong>neutre et objective</strong> de la réalité, sans éléments subjectifs ou de préférence.</td><td>Il pleut dehors.</td></tr>
+    <tr><td><strong>De préférence</strong></td><td><strong>Jugement de goût</strong></td><td>Exprime la préférence d'un individu ou d'un groupe. <strong>Aucune utilité en argumentation</strong> : ne fait pas avancer l'argumentation rationnelle.</td><td>Je préfère le café au thé.</td></tr>
+    <tr><td><strong>De valeur</strong></td><td><strong>Proposition d'appréciation</strong></td><td>On déclare qu'une chose est <strong>digne ou non d'estime sur le plan moral</strong>. Ils constituent l'<strong>essence des discours éthiques et politiques</strong>. Part de <strong>subjectivité et d'objectivité</strong>, mais pas irrationnels comme la préférence.</td><td>Ce film est excellent.</td></tr>
+    <tr><td><strong>De prescription</strong></td><td><strong>Proposition d'obligation</strong></td><td>On <strong>invite une personne à adopter un comportement</strong> particulier ou à agir d'une certaine manière. Repose sur des <strong>jugements de fait ou de valeur</strong>.</td><td>Tu devrais dire la vérité.</td></tr>
+  </table></div>
+
+  <h3>Les quatre jugements de fait (selon la quantification du sujet)</h3>
+  <p>Avec le sujet « arbre » et le prédicat « vert » :</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Proposition</th><th>Exemple</th><th>Le mot qui la signale</th></tr>
+    <tr><td><strong>Singulière</strong></td><td>Cet arbre est vert.</td><td><strong>Cet</strong></td></tr>
+    <tr><td><strong>Particulière</strong></td><td>Certains arbres sont verts.</td><td><strong>Certains</strong></td></tr>
+    <tr><td><strong>Universelle</strong></td><td>Tous les arbres sont verts.</td><td><strong>Tous</strong></td></tr>
+    <tr><td><strong>Indéfinie</strong></td><td>L'arbre est vert.</td><td><strong>L'</strong> (sans quantité)</td></tr>
+  </table></div>
+  <div class="retenir">
+    <span class="blabel">Truc mémo</span>
+    <p>Les autres noms : <strong>E-G-A-O</strong> = Empirique (fait), Goût (préférence), Appréciation (valeur), Obligation (prescription). Les quatre faits : <strong>Cet, Certains, Tous, L'</strong> = Singulière, Particulière, Universelle, Indéfinie (« S-P-U-I »).</p>
+  </div>
+  <div class="piege">
+    <span class="blabel">Piège d'examen</span>
+    <p>Valeur ou préférence ? La valeur porte sur l'<strong>estime morale</strong> et contient une <strong>partie objective</strong>. Sans partie objective, c'est une préférence. Les mots « devrait », « il faut » signalent une <strong>prescription</strong>. Et « Ferme la porte ! » n'est pas une proposition (phrase impérative).</p>
+  </div>
+  <div class="sec-actions"></div>
+</section>
+
+<!-- ---------------------------------------------------------------- S4 -->
+<section class="fiche" id="s4" data-title="Force et véracité">
+  <div class="eyebrow">Partie 1 · Fiche 4 · L'argumentation rationnelle</div>
+  <h2>Force et véracité : comment évaluer chaque jugement</h2>
+  <p class="lead">Le guide de révision demande « les critères de force et vérité ». Chaque type de jugement s'évalue différemment.</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Jugement</th><th>Critères de force et véracité</th></tr>
+    <tr><td><strong>De fait</strong></td><td>Peut être qualifié de <strong>vrai ou faux</strong>, et aussi de <strong>probable</strong>. La <strong>méthode d'évaluation dépend du type</strong> de jugement de fait : <strong>la météo aujourd'hui</strong> ne se vérifie pas comme <strong>le nombre de tentacules d'une pieuvre</strong>.</td></tr>
+    <tr><td><strong>De préférence</strong></td><td><strong>Purement subjectif</strong> : il n'y a <strong>pas de place</strong> pour lui dans un débat rationnel. Sa véracité est <strong>uniquement basée sur les goûts individuels</strong>.</td></tr>
+    <tr><td><strong>De valeur</strong></td><td><strong>Partiellement subjectif</strong> : on utilise la <strong>cohérence et la pertinence</strong> comme critères d'évaluation. Il faut évaluer la véracité des <strong>jugements de fait qui le sous-tendent</strong>.</td></tr>
+    <tr><td><strong>De prescription</strong></td><td>Évaluer la véracité des <strong>jugements qui le sous-tendent</strong>. Analyser la <strong>pertinence et la suffisance</strong> des arguments utilisés pour le soutenir.</td></tr>
+  </table></div>
+  <div class="retenir">
+    <span class="blabel">À retenir</span>
+    <p>Plus on descend de fait vers prescription, plus l'évaluation <strong>s'appuie sur les jugements de fait</strong> qui soutiennent le jugement. Seul le jugement de préférence échappe à toute évaluation rationnelle.</p>
+  </div>
+  <div class="piege">
+    <span class="blabel">Piège d'examen</span>
+    <p>Les deux mots du jugement de valeur sont <strong>cohérence</strong> et <strong>pertinence</strong>. Les deux mots du jugement de prescription sont <strong>pertinence</strong> et <strong>suffisance</strong>. Ne les inverse pas.</p>
+  </div>
+  <div class="sec-actions"></div>
+</section>
+
+<!-- ---------------------------------------------------------------- S5 -->
+<section class="fiche" id="s5" data-title="La structure du raisonnement">
+  <div class="eyebrow">Partie 1 · Fiche 5 · Cours 10</div>
+  <h2>La structure du raisonnement</h2>
+  <div class="def">
+    <span class="blabel">Définition</span>
+    <span class="term">Le raisonnement</span>
+    <p>Un <strong>type particulier de discours</strong>, utilisé pour <strong>convaincre rationnellement</strong> de quelque chose. Le but est de démontrer que la proposition <strong>« conclusion »</strong> est vraie sur la base de sa relation avec les autres propositions, appelées <strong>« prémisses »</strong>.</p>
+  </div>
+  <ul>
+    <li>La vérité de la prémisse P implique que la conclusion C est <strong>vraie ou acceptable</strong>.</li>
+    <li>Lorsque le raisonnement est bien formé, la vérité ou l'acceptabilité de la conclusion est déterminée par les prémisses : <strong>P justifie rationnellement C</strong>.</li>
+    <li>La relation inverse est aussi vraie : <strong>C est une conséquence logique de P</strong>.</li>
+  </ul>
+  <div class="two">
+    <div class="col r"><h5>Bien formé</h5><ul><li>P1 Tous les mammifères respirent de l'air.</li><li>P2 Les dauphins sont des mammifères.</li><li>C Donc, les dauphins respirent de l'air.</li></ul></div>
+    <div class="col m"><h5>Mal formé</h5><ul><li>P1 Certains animaux sont des chats.</li><li>P2 Cet animal est une chauve-souris.</li><li>C Donc cette chauve-souris est un chat.</li></ul></div>
+  </div>
+  <p>Autres exemples du cours : <strong>les carrés sont des rectangles</strong> (cette figure est un carré, donc un rectangle) et <strong>la pluie mouille les rues</strong> (il pleut, donc les rues sont mouillées : conclusion acceptable).</p>
+  <div class="note">
+    <span class="blabel">Corrigé proposé (pas fourni par la prof)</span>
+    <ul>
+      <li><strong>Marie enseigne un cours, donc elle est professeure</strong> : non valide, enseigner un cours n'est pas réservé aux profs. Version valide : « Tous les professeurs enseignent un cours. Marie est professeure. Donc Marie enseigne un cours. »</li>
+      <li><strong>Dauphins</strong>, <strong>Sophie et son travail final</strong>, <strong>Socrate être humain</strong> : valides.</li>
+      <li><strong>Aucun carré n'a quatre côtés</strong> : la forme se tient, mais P1 est fausse (problème d'acceptabilité). Version : « Tous les carrés ont quatre côtés égaux. Cette figure n'a pas quatre côtés égaux. Donc ce n'est pas un carré. »</li>
+      <li><strong>Félix est un chat</strong> : non valide. Version : « Tous les chats sont des animaux. Félix est un chat. Donc Félix est un animal. »</li>
+    </ul>
+  </div>
+  <div class="sec-actions"></div>
+</section>
+
+<!-- ---------------------------------------------------------------- S6 -->
+<section class="fiche" id="s6" data-title="Déductif et inductif">
+  <div class="eyebrow">Partie 1 · Fiche 6 · Cours 10</div>
+  <h2>Les raisonnements déductif et inductif</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th></th><th>Raisonnement déductif</th><th>Raisonnement inductif</th></tr>
+    <tr><td><strong>Direction</strong></td><td>Va du <strong>général au particulier</strong></td><td>Va du <strong>particulier au général</strong></td></tr>
+    <tr><td><strong>Si les prémisses sont vraies</strong></td><td>La conclusion est <strong>nécessairement vraie</strong></td><td>Les prémisses rendent la conclusion <strong>probable, mais non certaine</strong></td></tr>
+    <tr><td><strong>Contenu</strong></td><td>La conclusion est <strong>contenue logiquement</strong> dans les prémisses</td><td>La conclusion <strong>dépasse</strong> ce qui est directement contenu dans les prémisses</td></tr>
+    <tr><td><strong>Sert à</strong></td><td><strong>Démontrer avec certitude</strong> (<strong>validité logique</strong>)</td><td>Formuler des <strong>généralisations basées sur l'observation</strong></td></tr>
+    <tr><td><strong>Exemple</strong></td><td>Tous les mammifères respirent de l'air. Les chiens sont des mammifères. Donc les chiens respirent de l'air.</td><td>Ce cygne est blanc. Ce cygne est blanc. Tous les cygnes observés ici sont blancs. Donc tous les cygnes sont blancs. (Faux s'il y a des <strong>cygnes noirs dans un autre parc</strong>.)</td></tr>
+  </table></div>
+  <h3>Le raisonnement inductif</h3>
+  <ul>
+    <li>La vérité des prémisses rend <strong>probable</strong> la vérité de la conclusion.</li>
+    <li>Même bien formé, il ne donne <strong>pas de garantie absolue</strong>.</li>
+    <li>La <strong>majorité des raisonnements que nous faisons quotidiennement</strong> sont inductifs.</li>
+  </ul>
+  <dl class="kv">
+    <dt>Exemple 1</dt><dd>Le <strong>soleil</strong> s'est levé chaque jour jusqu'à présent, donc il se lèvera demain. Probable, pas garanti.</dd>
+    <dt>Exemple 2</dt><dd>Les <strong>20 étudiants</strong> interrogés préfèrent étudier avec de la musique, donc les étudiants du cégep aussi. On généralise à partir d'un <strong>groupe limité</strong>.</dd>
+    <dt>Exemple 3</dt><dd>Chaque fois que je bois du <strong>café le soir</strong>, je dors mal. Relation <strong>causale probable</strong>, mais pas certaine.</dd>
+  </dl>
+  <div class="retenir">
+    <span class="blabel">Truc mémo</span>
+    <p><strong>DÉ</strong>ductif <strong>DÉ</strong>scend : de la règle générale vers le cas. <strong>IN</strong>ductif <strong>IN</strong>vente la règle à partir des cas observés.</p>
+  </div>
+  <div class="note">
+    <span class="blabel">Corrigé proposé : classer A, B, C</span>
+    <p><strong>C, puis B, puis A.</strong> C repose sur 15 000 étudiants et conclut prudemment (« la majorité »). B repose sur 50 cas et dit « probablement ». A généralise à « tous » à partir de 2 étudiants (généralisation hâtive). Critères : taille de l'échantillon, représentativité, prudence de la conclusion.</p>
+  </div>
+  <div class="sec-actions"></div>
+</section>
+
+<!-- ---------------------------------------------------------------- S7 -->
+<section class="fiche" id="s7" data-title="Acceptabilité, pertinence, suffisance">
+  <div class="eyebrow">Partie 1 · Fiche 7 · Cours 10</div>
+  <h2>Évaluer un raisonnement : acceptabilité, pertinence, suffisance</h2>
+  <p class="lead">On évalue d'abord <strong>chaque prémisse</strong> (acceptabilité), puis <strong>les liens entre les prémisses et la conclusion</strong> (pertinence et suffisance).</p>
+
+  <h3>1. L'acceptabilité des prémisses</h3>
+  <dl class="kv">
+    <dt>Jugement de fait</dt><dd>Pour être acceptable, il doit être <strong>vrai ou probable</strong>. On se base sur des <strong>observations fiables</strong>, des <strong>preuves solides</strong>, des <strong>données validées</strong>, des <strong>sources crédibles</strong> et des <strong>expertises pertinentes</strong>.</dd>
+    <dt>Jugement de valeur</dt><dd>Il s'appuie sur des <strong>jugements de fait que l'on peut évaluer séparément</strong>. Pour qu'il ne soit pas une préférence, il faut s'assurer qu'il y a une <strong>partie objective</strong> dans la proposition.</dd>
+    <dt>Jugement de prescription</dt><dd>Il s'appuie sur des <strong>jugements de fait évaluables séparément</strong>. Il faut aussi évaluer la <strong>nature et l'effet</strong> de la prescription : <strong>faisabilité</strong>, <strong>lien avec l'objectif</strong>, <strong>conséquences</strong>.</dd>
+  </dl>
+
+  <h3>2. La pertinence des prémisses</h3>
+  <ul>
+    <li>Même si toutes les prémisses sont acceptables, elles n'apportent pas nécessairement un <strong>élément de preuve pertinent</strong> à la conclusion.</li>
+    <li>Les prémisses doivent avoir un <strong>lien clair et direct</strong> avec la conclusion.</li>
+    <li>Il n'existe <strong>pas de critère précis</strong> : il faut faire preuve de <strong>sens critique</strong> et examiner avec soin le lien logique.</li>
+    <li>Exemples : « Le dauphin est un mammifère… Donc la <strong>Lune</strong> tourne autour de la Terre. » « <strong>Ambre</strong> est adepte de la moto. Il y a eu un vol de cellulaire. Donc Ambre a volé le cellulaire. »</li>
+  </ul>
+
+  <h3>3. La suffisance des prémisses</h3>
+  <ul>
+    <li>Même acceptables et pertinentes, les prémisses ne sont pas forcément <strong>suffisantes</strong> pour établir la conclusion.</li>
+    <li><strong>Seuls les raisonnements déductifs ont une parfaite suffisance</strong>.</li>
+    <li>Dans les inductifs, la suffisance indique le <strong>degré d'acceptabilité ou de probabilité</strong> de la conclusion.</li>
+    <li>Les liens doivent être <strong>suffisamment forts</strong> pour donner un <strong>poids convenable</strong> à la conclusion.</li>
+    <li>Exemples : un citoyen de <strong>Saint-Honoré</strong> désagréable, donc tous le sont. Lorsqu'il pleut la chaussée est mouillée ; <strong>la chaussée est mouillée, donc il pleut</strong>.</li>
+  </ul>
+  <div class="retenir">
+    <span class="blabel">Truc mémo</span>
+    <p><strong>A-P-S</strong> : A = la prémisse seule est-elle vraie ? P = a-t-elle un lien avec la conclusion ? S = ce lien est-il assez fort ?</p>
+  </div>
+  <div class="note">
+    <span class="blabel">Corrigés proposés</span>
+    <p><strong>Pertinence (Greta Thunberg)</strong> : les arguments 1 (âge et syndrome d'Asperger), 4 (jeune et suédoise) et 6 (la grève chez Exceldor) ont des prémisses peu ou pas pertinentes.</p>
+    <p><strong>Suffisance</strong> : seul le 3 (la tourte voyageuse est éteinte depuis plus d'un siècle) respecte le critère. Le 1 généralise à partir d'une seule observation ; le 2 passe de « diminue les risques » à « jamais » ; le 4 passe de « contre le passeport vaccinal » à « contre les vaccins ».</p>
+  </div>
+  <div class="sec-actions"></div>
+</section>
+
+<!-- ---------------------------------------------------------------- S8 -->
+<section class="fiche" id="s8" data-title="Les sophismes">
+  <div class="eyebrow">Partie 1 · Fiche 8 · Cours 12</div>
+  <h2>Les sophismes</h2>
+  <div class="def">
+    <span class="blabel">Définition</span>
+    <span class="term">Le sophisme</span>
+    <p>Un raisonnement <strong>non conforme aux règles de logique</strong> et <strong>consciemment utilisé pour tromper autrui</strong>. Ce sont des <strong>ruses ayant l'apparence de la rationalité</strong>, mais visant à <strong>persuader et non convaincre rationnellement</strong>.</p>
+  </div>
+  <ul>
+    <li>Tout sophisme inclut un défaut au niveau de l'<strong>acceptabilité</strong>, de la <strong>pertinence</strong> ou de la <strong>suffisance</strong>.</li>
+    <li>Il faut les reconnaître, car ils sont présents autant en <strong>politique</strong> que dans les <strong>médias</strong>, les <strong>discussions</strong> et les <strong>publicités</strong> (manuel, p. 29 à 31).</li>
+  </ul>
+  <div class="tbl-wrap"><table>
+    <tr><th>Critère</th><th>Sophisme</th><th>Définition</th><th>Exemple du cours</th></tr>
+    <tr><td rowspan="2"><strong>Acceptabilité</strong></td><td><strong>Appel à l'autorité</strong></td><td>Invoquer l'autorité d'un expert <strong>qui n'a pas de compétence sur le sujet</strong></td><td>Le camion Ford est excellent, <strong>The Rock</strong> a dit qu'il a le même.</td></tr>
+    <tr><td><strong>Faux dilemme</strong></td><td>Imposer un <strong>choix entre deux options</strong> qui implique le rejet de l'option non choisie</td><td>Soit on réduit les dépenses du gouvernement, soit <strong>l'économie va s'effondrer</strong>.</td></tr>
+    <tr><td rowspan="6"><strong>Pertinence</strong></td><td><strong>Attaque contre la personne</strong></td><td>Attaquer <strong>l'individu ou l'institution</strong> au lieu de réfuter le raisonnement</td><td>Ton argument sur l'environnement ne vaut rien, <strong>tu conduis un VUS</strong>.</td></tr>
+    <tr><td><strong>Double faute</strong></td><td>Justifier une opinion basée sur des <strong>fautes commises par autrui</strong></td><td>Je roulais trop vite, mais je ne faisais que <strong>suivre le trafic</strong>.</td></tr>
+    <tr><td><strong>Caricature</strong></td><td><strong>Déformer l'interprétation</strong> de la position de quelqu'un pour la réfuter plus facilement</td><td>Tu veux réduire les téléphones ? Donc tu veux <strong>interdire toute technologie</strong>.</td></tr>
+    <tr><td><strong>Appel à la popularité</strong></td><td>Fonder la crédibilité d'une opinion sur le fait qu'<strong>une grande partie de la population y croit</strong></td><td><strong>Tout le monde pense</strong> que ce film est bon, donc il est bon.</td></tr>
+    <tr><td><strong>Appel à la modernité ou à la nouveauté</strong></td><td>Fonder la valeur d'une croyance sur son <strong>originalité ou son avant-gardisme</strong></td><td>Ce téléphone est le meilleur parce qu'il <strong>vient de sortir</strong>.</td></tr>
+    <tr><td><strong>Lien causal douteux</strong></td><td>Supposer une <strong>relation de cause à effet sans preuve</strong></td><td>Depuis que j'ai changé de téléphone, <strong>mes notes ont baissé</strong>.</td></tr>
+    <tr><td rowspan="3"><strong>Suffisance</strong></td><td><strong>Généralisation hâtive</strong></td><td>Tirer une conclusion générale à partir d'un <strong>nombre insuffisant de cas</strong></td><td><strong>Deux étudiants</strong> en retard, donc les étudiants du programme sont irresponsables.</td></tr>
+    <tr><td><strong>Pente fatale</strong></td><td>Une action entraînera une <strong>série de conséquences extrêmes</strong>, sans preuve suffisante</td><td>Un repas pas équilibré, puis le fast food… puis <strong>mourir avant 40 ans</strong>.</td></tr>
+    <tr><td><strong>Affirmation du conséquent</strong></td><td>Affirmer qu'une <strong>condition nécessaire est suffisante</strong> pour qu'un phénomène se produise</td><td>S'il pleut, il y a des nuages. <strong>Il y a des nuages, donc il pleut.</strong></td></tr>
+  </table></div>
+  <div class="retenir">
+    <span class="blabel">Truc mémo : 2, 6, 3</span>
+    <p><strong>Acceptabilité (2)</strong> : « AF » = Autorité, Faux dilemme.</p>
+    <p><strong>Pertinence (6)</strong> : « <strong>A</strong>h ! <strong>D</strong>eux <strong>C</strong>hats <strong>P</strong>our <strong>M</strong>on <strong>L</strong>it » = Attaque, Double faute, Caricature, Popularité, Modernité, Lien causal douteux.</p>
+    <p><strong>Suffisance (3)</strong> : « GPA » = Généralisation hâtive, Pente fatale, Affirmation du conséquent.</p>
+  </div>
+  <div class="piege">
+    <span class="blabel">Pièges d'examen</span>
+    <ul>
+      <li>Le <strong>lien causal douteux</strong> est classé en <strong>pertinence</strong>, pas en suffisance.</li>
+      <li>L'<strong>affirmation du conséquent</strong> est en <strong>suffisance</strong>.</li>
+      <li>Le <strong>faux dilemme</strong> est en <strong>acceptabilité</strong>.</li>
+      <li>Citer un vrai expert dans <strong>son</strong> domaine n'est pas un sophisme : l'appel à l'autorité, c'est un expert hors de sa compétence.</li>
+    </ul>
+  </div>
+  <div class="note">
+    <span class="blabel">Corrigé proposé : le texte sur les jeunes et les écrans</span>
+    <ul>
+      <li><strong>(1)</strong> « Les jeunes ne savent pas lire » : généralisation hâtive.</li>
+      <li><strong>(2)</strong> « Les yeux rivés sur leur écran » : généralisation hâtive (ou lien causal douteux).</li>
+      <li><strong>(3)</strong> « Parce qu'ils sont jeunes, ils ne savent pas penser » : attaque contre la personne.</li>
+      <li><strong>(4)</strong> « Pour preuve, mon neveu… » : généralisation hâtive (un seul cas).</li>
+      <li><strong>(5)</strong> « Mon neveu ressemble à une moule » : attaque contre la personne.</li>
+      <li><strong>(6)</strong> « Ou bien des lois, ou bien des ignorants » : faux dilemme.</li>
+      <li><strong>(7)</strong> « Une société comme celle du Moyen Âge » : pente fatale.</li>
+      <li><strong>(8)</strong> « Sûrement les fabricants de logiciels » : lien causal douteux (ou attaque contre une institution).</li>
+      <li><strong>(9)</strong> « Tout le monde le dit » : appel à la popularité.</li>
+    </ul>
+    <p>Vérifie les cas (2) et (8) avec la correction faite en classe.</p>
+  </div>
+  <div class="sec-actions"></div>
+</section>
