@@ -77,6 +77,8 @@ ul, ol { margin: 0; padding-left: 1.25em; display: grid; gap: 4px; }
 
 main { padding-block: 22px 80px; }
 .view { display: grid; gap: 28px; }
+/* Sans minmax(0,1fr), la rangée de pastilles (nowrap) élargit toute la grille sur téléphone */
+.view, .top, section.fiche, .sub, .cell, .panel, .flash, .qz, .dev, .dev .in, .dev .blk, details.corr .in, .memo, .piege, .missed { grid-template-columns: minmax(0, 1fr); }
 
 /* Fiches */
 .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
