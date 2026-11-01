@@ -9,14 +9,16 @@ Fait le 1er novembre 2026 à partir des PDF du dossier `Grasset Session 1\Philo 
 - La progression reste dans le navigateur (localStorage, clé `agora-340-t2`).
 
 ## Contenu
-- **Express 25 min** (vue d'ouverture) : bloc A choix multiples, bloc B seize réponses courtes, bloc C cinq plans de développement, bloc D mini-test.
-- **Fiches** : 16 fiches + le guide (s0), sommaire, cases « je maîtrise », « Quiz sur cette fiche », **mode récitation** (les mots en gras deviennent des blocs à révéler).
+Onglets dans l'ordre voulu par Julien (« je ne suis pas 25 min avant le test ») : Fiches de révision, Quiz, Examen, puis Synthèse et Cartes éclair.
+- **Fiches de révision** (vue d'ouverture) : le guide (s0) avec un plan d'étude en 7 étapes, puis 16 fiches, sommaire, cases « je maîtrise », « Quiz sur cette fiche », **mode récitation** (les mots en gras deviennent des blocs à révéler).
 - **Quiz** : 291 questions (151 QCM, 70 V/F, 57 courtes, 13 développements).
-- **Examen blanc** : 32 questions, chrono 2 h. **Cartes éclair** : les 57 courtes.
+- **Examen** : 32 questions, chrono 2 h, historique.
+- **Synthèse** (`parts/f-express.html`, vue `synthese`) : l'ancien Express sans chrono ni minutes : bloc A choix multiples, bloc B seize réponses courtes, bloc C cinq plans, bloc D mini-test.
+- **Cartes éclair** : les 57 courtes.
 
 ## Modifier
 - `parts/a-head.html` (CSS d'Agora) + `parts/a-extra.css` (ajouts : récitation, fenêtre de confirmation, listes `.kv`).
-- `parts/f-express.html`, `parts/b1-fiches.html` (en-tête, sommaire, s0 à s8), `parts/b2-fiches.html` (s9 à s16), `parts/c-views.html`.
+- `parts/b1-fiches.html` (en-tête, sommaire, s0 à s8), `parts/b2-fiches.html` (s9 à s16), `parts/c-views.html`, `parts/f-express.html` (Synthèse). La barre d onglets est en tête de b1 : build.js la place avant toutes les vues.
 - `parts/d-core.js` : groupes, types, questions à développement (`DEVS`). `parts/bank/bank-a..d.json` : QCM, V/F, courtes (format dans `parts/bank/SPEC.md`).
 - `parts/e-app.js` : moteur d'Agora ; `confirm()` remplacé par `ask()` (bloqué dans un Artifact), bouton Imprimer caché dans un Artifact.
 - `node build.js` vérifie la banque et écrit `agora-340-t2.html`, `docs/index.html` et la copie hors ligne. Puis `git add -A`, commit, push. `node serve.js` : http://localhost:8770/.

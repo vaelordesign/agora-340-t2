@@ -37,7 +37,7 @@ function ask(msg,yes){ return new Promise(res=>{
 }); }
 
 // ---------------- navigation
-const VIEWS=['express','fiches','quiz','exam','cards'];
+const VIEWS=['fiches','quiz','exam','synthese','cards'];
 function showView(v){
   VIEWS.forEach(x=>$('#view-'+x).classList.toggle('on',x===v));
   $$('.tab').forEach(t=>t.setAttribute('aria-selected', t.getAttribute('data-view')===v ? 'true':'false'));
@@ -47,8 +47,8 @@ function showView(v){
 }
 $$('.tab').forEach(t=>t.addEventListener('click',()=>{ location.hash='#'+t.getAttribute('data-view'); }));
 function route(){
-  const h=(location.hash||'#express').slice(1);
-  if(VIEWS.indexOf(h)>=0){ showView(h); if(h==='fiches'||h==='express') window.scrollTo(0,0); return; }
+  const h=(location.hash||'#fiches').slice(1);
+  if(VIEWS.indexOf(h)>=0){ showView(h); if(h==='fiches'||h==='synthese') window.scrollTo(0,0); return; }
   const anchor=/^[a-z][a-z0-9_-]*$/i.test(h)?$('#'+h):null; const av=anchor&&anchor.closest('.view'); if(av){ showView(av.id.replace('view-','')); setTimeout(()=>{ anchor.scrollIntoView({block:'start'}); },0); return; }
   if(/^s\d+$/.test(h) && $('#'+h)){ showView('fiches'); $('#toc').classList.remove('open'); setTimeout(()=>{ $('#'+h).scrollIntoView({block:'start'}); },0); return; }
   showView('fiches');
@@ -334,8 +334,8 @@ function renderCard(){
 // ---------------- révision express
 $$('[data-express]').forEach(b=>b.addEventListener('click',()=>{
   const all=GROUPS.reduce((a,g)=>a.concat(g.s),[]);
-  if(b.getAttribute('data-express')==='mix') startQuiz({sections:all,types:['qcm','vf'],n:12,prio:false,label:'Mini-test express'});
-  else startQuiz({sections:all,types:['courte'],n:4,prio:false,label:'Mini-test express'});
+  if(b.getAttribute('data-express')==='mix') startQuiz({sections:all,types:['qcm','vf'],n:12,prio:false,label:'Mini-test'});
+  else startQuiz({sections:all,types:['courte'],n:4,prio:false,label:'Mini-test'});
   location.hash='#quiz';
 }));
 (function(){ const btn=$('#x-chrono'), out=$('#x-timer'); if(!btn) return; let t0=null, id=null;

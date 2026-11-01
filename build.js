@@ -36,7 +36,8 @@ const perFiche=fiches.map(s=>s+':'+all.filter(q=>q.s===s).length).join(' ');
 // ---------------- page
 const bankJs='const BANK = '+JSON.stringify(bank).split('</').join('<\\/')+'.concat(DEVS);\n';
 const head=P('a-head.html').split('<title>Agora 340</title>').join('<title>Agora 340 · Test 2</title>').replace('</style>', ()=>P('a-extra.css')+'</style>');
-const body=[P('f-express.html'),P('b1-fiches.html'),P('b2-fiches.html'),P('c-views.html'),'<script>',core,bankJs,P('e-app.js'),'</script>',''].join('\n');
+// la barre d'onglets est en tête de b1-fiches.html : elle doit précéder toutes les vues
+const body=[P('b1-fiches.html'),P('b2-fiches.html'),P('c-views.html'),P('f-express.html'),'<script>',core,bankJs,P('e-app.js'),'</script>',''].join('\n');
 fs.writeFileSync(p.join(__dirname,'agora-340-t2.html'),head+'\n'+body);
 fs.mkdirSync(p.join(__dirname,'docs'),{recursive:true});
 const extra='<meta name="robots" content="noindex">\n<meta name="theme-color" content="#24508E">\n';
